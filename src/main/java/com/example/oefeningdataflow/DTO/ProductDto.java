@@ -1,15 +1,10 @@
-package com.example.oefeningdataflow.Models;
+package com.example.oefeningdataflow.DTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-@Entity
-public class Wool {
-    @Id
-    @GeneratedValue
+public class ProductDto {
+
     private Long id;
     private String name;
     private String brand;
@@ -17,7 +12,7 @@ public class Wool {
     private String blend;
     private Integer needleSize;
     private Integer length;
+    private String description;
     private String category;
-
 
 }

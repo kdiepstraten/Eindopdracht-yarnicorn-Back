@@ -1,7 +1,7 @@
 package com.example.oefeningdataflow.Controllers;
 
-import com.example.oefeningdataflow.DTO.WoolDTO;
-import com.example.oefeningdataflow.Service.WoolService;
+import com.example.oefeningdataflow.DTO.ProductDto;
+import com.example.oefeningdataflow.Service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,24 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/wools")
-public class WoolController {
+@RequestMapping("/product")
+public class ProductController {
 
-    private final WoolService woolService;
+    private final ProductService productService;
 
-    public WoolController(WoolService woolService) {
-        this.woolService = woolService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping
-    public ResponseEntity<List<WoolDTO>> getAllWool() {
-        List<WoolDTO> wdto = woolService.getAllWool();
+    public ResponseEntity<List<ProductDto>> getAllWool() {
+        List<ProductDto> wdto = productService.getAllWool();
         return new ResponseEntity<>(wdto, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WoolDTO> getOneWool(@PathVariable Long id) {
-        WoolDTO wdto = woolService.getWool(id);
+    public ResponseEntity<ProductDto> getOneWool(@PathVariable Long id) {
+        ProductDto wdto = productService.getWool(id);
         return new ResponseEntity<>(wdto, HttpStatus.OK);
     }
 
@@ -43,14 +43,14 @@ public class WoolController {
 
 
     @PostMapping
-    public ResponseEntity<WoolDTO> createWool(@RequestBody WoolDTO woolDTO) {
-        WoolDTO newWool = woolService.createWool(woolDTO);
+    public ResponseEntity<ProductDto> createWool(@RequestBody ProductDto productDTO) {
+        ProductDto newWool = productService.createWool(productDTO);
         return new ResponseEntity<>(newWool, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<WoolDTO> deleteWool(@PathVariable Long id) {
-        woolService.deleteWool(id);
+    public ResponseEntity<ProductDto> deleteWool(@PathVariable Long id) {
+        productService.deleteWool(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
