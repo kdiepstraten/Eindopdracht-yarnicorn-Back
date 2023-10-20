@@ -2,8 +2,9 @@ package com.example.oefeningdataflow.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
 @Entity
@@ -14,5 +15,8 @@ public class User {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles = new HashSet<>();
+    private List<Role> roles = new ArrayList<>();
+
+    @OneToOne(fetch = FetchType.EAGER)
+    Profile profile;
 }

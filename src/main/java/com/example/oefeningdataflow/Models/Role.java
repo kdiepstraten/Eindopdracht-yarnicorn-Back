@@ -1,11 +1,11 @@
 package com.example.oefeningdataflow.Models;
-import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -13,9 +13,9 @@ import java.util.Set;
 @Table(name = "roles")
 public class Role {
     @Id
-    private String roleName;
+    private String rolename;
 
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<User> users;
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 }

@@ -1,9 +1,6 @@
 package com.example.oefeningdataflow.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -22,5 +19,7 @@ public class Product {
     private String description;
     private String category;
 
+    @OneToOne
+    Reservation reservation;
 
 }

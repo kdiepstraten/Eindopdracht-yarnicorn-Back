@@ -1,14 +1,16 @@
 package com.example.oefeningdataflow.Service;
 import com.example.oefeningdataflow.DTO.UserDto;
-import com.example.oefeningdataflow.Exceptions.UserNotFoundException;
 import com.example.oefeningdataflow.Models.Role;
 import com.example.oefeningdataflow.Models.User;
+import com.example.oefeningdataflow.Repository.RoleRepository;
 import com.example.oefeningdataflow.Repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 
 @Service
@@ -16,10 +18,13 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
 
@@ -39,41 +44,31 @@ public class UserService {
     private static void userToUserDto(User u, UserDto uDto) {
         uDto.setUsername(u.getUsername());
         uDto.setPassword(u.getPassword());
+        ArrayList<String> roles = new ArrayList<>();
+        for (Role role : u.getRoles()){
+            roles.add(role.getRolename());
+        }
+        uDto.setRoles(roles.toArray(new String [0]));
     }
     private static void userDtoToUser(User u, UserDto uDto) {
         u.setUsername(uDto.getUsername());
         u.setPassword(uDto.getPassword());
     }
-    public String createNewUser(UserDto userDto) {
-        // Convert UserDto to User entity (you may need additional properties)
+    public String createUser(UserDto userDto) {
         User newUser = new User();
+        newUser.setUsername(userDto.getUsername());
+        newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-      userToUserDto(newUser, userDto);
-        // Set other user properties...
-
-        // Securely hash the user's password (assuming a field named 'password' in User entity)
-        String hashedPassword = passwordEncoder.encode(userDto.getPassword());
-        newUser.setPassword(hashedPassword);
-
-        // Save the new user to the repository
+        List<Role> userRoles = newUser.getRoles();
+        for (String rolename : userDto.getRoles()) {
+            Optional<Role> or = roleRepository.findById("ROLE_" + rolename);
+            if (or.isPresent()) {
+                userRoles.add(or.get());
+            }
+        }
         userRepository.save(newUser);
 
-        return newUser.getUsername(); // Return the username of the newly created user
-    }
-    public void addAuthority(String username, String newRole) {
-        User user = userRepository.findByUsername(username);
-
-        if (user != null) {
-            // Create a new authority (e.g., a role) and add it to the user
-            Role role = new Role();
-            role.setRoleName(newRole);
-
-            user.getRoles().add(role);
-            // Update the user in the repository
-            userRepository.save(user);
-        } else {
-            throw new UserNotFoundException("User not found with username: " + username);
-        }
+        return "User created";
     }
 }
 

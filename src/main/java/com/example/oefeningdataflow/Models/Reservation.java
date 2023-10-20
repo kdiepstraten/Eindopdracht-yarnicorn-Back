@@ -2,6 +2,7 @@ package com.example.oefeningdataflow.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -18,4 +19,6 @@ public class Reservation {
     private Integer amount;
     private String comment;
 
+    @OneToOne(mappedBy = "reservation")
+    Product product;
 }

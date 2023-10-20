@@ -2,7 +2,6 @@ package com.example.oefeningdataflow.Service;
 
 import com.example.oefeningdataflow.DTO.RoleDto;
 import com.example.oefeningdataflow.Models.Role;
-import com.example.oefeningdataflow.Models.User;
 import com.example.oefeningdataflow.Repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,7 @@ public class RoleService {
 
         for (Role r : repos.findAll()) {
             RoleDto rdto = new RoleDto();
-            rdto.setRolename(r.getRoleName());
+            rdto.setRolename(r.getRolename());
 
             roleDtos.add(rdto);
         }

@@ -49,11 +49,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/*").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/*").permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/*").permitAll()
-                        .requestMatchers("/secret").hasRole("ADMIN")
-                        .requestMatchers("/hello").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                         .anyRequest().denyAll()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
