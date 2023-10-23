@@ -18,12 +18,19 @@ public class Profile {
     private String lastname;
     private String email;
 
-//    Relation with User
+//    Relation with User OneToOne.
     @OneToOne(mappedBy = "profile")
     User user;
 
-//    Relation with Reservation.
+//    Relation with Reservation OneToMany.
     @OneToMany(mappedBy = "profile")
     List<Reservation> reservations;
 
+//    Relation with Product ManyToMany.
+    @ManyToMany
+    List<Product> products;
+
+//    Relation with Review OneToMany.
+    @OneToMany
+    List<Review> review;
 }

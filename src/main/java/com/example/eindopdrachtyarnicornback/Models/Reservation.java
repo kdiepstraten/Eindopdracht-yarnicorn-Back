@@ -17,15 +17,11 @@ public class Reservation {
     private Integer amount;
     private String comment;
 
-//    Relation with Products.
+//    Relation with Products OneToOne.
     @OneToOne(mappedBy = "reservation")
     Product product;
 
-//    Relation with Users.
-    @ManyToOne
-    User user;
-
-//    Relation with Profile.
+//    Relation with Profile ManyToOne.
     @ManyToOne
     Profile profile;
 }

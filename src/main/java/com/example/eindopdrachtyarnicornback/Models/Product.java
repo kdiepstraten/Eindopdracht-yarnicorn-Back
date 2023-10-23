@@ -22,13 +22,13 @@ public class Product {
     private String description;
     private String category;
 
-//    Relation with Reservation. Product is the primary
+//    Relation with Reservation OneToOne. Product is the primary
     @OneToOne
     Reservation reservation;
 
-//    Relation with User.
+//    Relation with Profile.
     @ManyToMany(mappedBy = "products")
-    List<User> users;
+    List<Profile> profiles;
 
 
 }
