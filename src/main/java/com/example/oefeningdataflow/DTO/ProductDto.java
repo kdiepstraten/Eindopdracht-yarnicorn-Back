@@ -12,6 +12,7 @@ public class ProductDto {
     private String blend;
     private Integer needleSize;
     private Integer length;
+    private String gauge;
     private String description;
     private String category;
 

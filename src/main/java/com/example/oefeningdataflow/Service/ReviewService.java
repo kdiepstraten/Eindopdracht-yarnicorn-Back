@@ -1,9 +1,7 @@
 package com.example.oefeningdataflow.Service;
 
 import com.example.oefeningdataflow.DTO.ReviewDto;
-import com.example.oefeningdataflow.DTO.UserDto;
 import com.example.oefeningdataflow.Models.Review;
-import com.example.oefeningdataflow.Models.User;
 import com.example.oefeningdataflow.Repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +31,12 @@ public class ReviewService {
 
     private static void reviewToReviewDto(Review r, ReviewDto rDto) {
         rDto.setReview(r.getReview());
-        rDto.setFullName(r.getFullName());
+        rDto.setFullName(r.getFullname());
     }
 
     private static void reviewDtoToReview(ReviewDto rDto, Review r) {
         r.setReview(rDto.getReview());
-        r.setFullName(rDto.getFullName());
+        r.setFullname(rDto.getFullName());
     }
 
     public ReviewDto createUser(ReviewDto reviewDto) {

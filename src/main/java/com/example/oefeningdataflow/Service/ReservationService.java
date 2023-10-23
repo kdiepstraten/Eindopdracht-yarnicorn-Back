@@ -29,20 +29,20 @@ public class ReservationService {
     }
 
     private void reservationToReservationDto(Reservation reservation, ReservationDto rdto) {
-        rdto.setFullName(reservation.getFullName());
+        rdto.setFullName(reservation.getFullname());
         rdto.setEmail(reservation.getEmail());
         rdto.setStreet(reservation.getStreet());
-        rdto.setStreetNumber(reservation.getStreetNumber());
+        rdto.setStreetNumber(reservation.getStreetnumber());
         rdto.setZipcode(reservation.getZipcode());
         rdto.setCity(reservation.getCity());
         rdto.setAmount(reservation.getAmount());
         rdto.setComment(reservation.getComment());
     }
     private void reservationDtoToReservation(ReservationDto rdto, Reservation reservation){
-        reservation.setFullName(rdto.getFullName());
+        reservation.setFullname(rdto.getFullName());
         reservation.setEmail(rdto.getEmail());
         reservation.setStreet(rdto.getStreet());
-        reservation.setStreetNumber(rdto.getStreetNumber());
+        reservation.setStreetnumber(rdto.getStreetNumber());
         reservation.setZipcode(rdto.getZipcode());
         reservation.setCity(rdto.getCity());
         reservation.setAmount(rdto.getAmount());

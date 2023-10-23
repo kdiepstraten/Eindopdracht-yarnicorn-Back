@@ -41,7 +41,8 @@ public class ProductService {
         wdto.setId(w.getId());
         wdto.setLength(w.getLength());
         wdto.setBlend(w.getBlend());
-        wdto.setNeedleSize(w.getNeedleSize());
+        wdto.setNeedleSize(w.getNeedlesize());
+        wdto.setGauge(w.getGauge());
         wdto.setDescription(w.getDescription());
         wdto.setCategory(w.getCategory());
     }
@@ -51,8 +52,9 @@ public class ProductService {
         product.setBrand(productDTO.getBrand());
         product.setColor(productDTO.getColor());
         product.setLength(productDTO.getLength());
+        product.setGauge(productDTO.getGauge());
         product.setBlend(productDTO.getBlend());
-        product.setNeedleSize(productDTO.getNeedleSize());
+        product.setNeedlesize(productDTO.getNeedleSize());
         product.setDescription(productDTO.getDescription());
         product.setCategory(productDTO.getCategory());
     }

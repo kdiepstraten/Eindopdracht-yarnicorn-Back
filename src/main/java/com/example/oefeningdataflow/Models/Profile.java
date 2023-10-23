@@ -1,10 +1,9 @@
 package com.example.oefeningdataflow.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -14,11 +13,17 @@ public class Profile {
     private Long id;
     private String username;
     private String password;
-    private String confirmPassword;
-    private String firstName;
-    private String lastName;
+    private String confirmpassword;
+    private String firstname;
+    private String lastname;
     private String email;
 
+//    Relation with User
     @OneToOne(mappedBy = "profile")
     User user;
+
+//    Relation with Reservation.
+    @OneToMany(mappedBy = "profile")
+    List<Reservation> reservations;
+
 }

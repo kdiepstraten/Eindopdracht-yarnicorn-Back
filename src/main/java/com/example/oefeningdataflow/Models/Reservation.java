@@ -1,8 +1,6 @@
 package com.example.oefeningdataflow.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -10,15 +8,24 @@ import lombok.Data;
 public class Reservation {
     @Id
     private Long id;
-    private String fullName;
+    private String fullname;
     private String email;
     private String street;
-    private Integer streetNumber;
+    private Integer streetnumber;
     private String zipcode;
     private String city;
     private Integer amount;
     private String comment;
 
+//    Relation with Products.
     @OneToOne(mappedBy = "reservation")
     Product product;
+
+//    Relation with Users.
+    @ManyToOne
+    User user;
+
+//    Relation with Profile.
+    @ManyToOne
+    Profile profile;
 }
