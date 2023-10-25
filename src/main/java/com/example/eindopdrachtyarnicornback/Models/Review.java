@@ -12,7 +12,7 @@ public class Review {
     @Id
     @GeneratedValue
     private Long id;
-    private String fullname;
+    private String fullName;
     private String review;
 
 //    Relation with Profile ManyToOne.

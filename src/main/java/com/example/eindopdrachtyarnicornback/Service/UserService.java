@@ -45,7 +45,7 @@ public class UserService {
         uDto.setPassword(u.getPassword());
         ArrayList<String> roles = new ArrayList<>();
         for (Role role : u.getRoles()){
-            roles.add(role.getRolename());
+            roles.add(role.getRoleName());
         }
         uDto.setRoles(roles.toArray(new String [0]));
     }

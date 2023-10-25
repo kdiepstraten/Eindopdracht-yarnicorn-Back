@@ -13,11 +13,12 @@ public class Profile {
     private Long id;
     private String username;
     private String password;
-    private String confirmpassword;
-    private String firstname;
-    private String lastname;
+    private String confirmPassword;
+    private String firstName;
+    private String lastName;
     private String email;
 
+    //TODO: in DB table users profileID is null.
 //    Relation with User OneToOne.
     @OneToOne(mappedBy = "profile")
     User user;

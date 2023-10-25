@@ -54,7 +54,7 @@ public class SecurityConfig {
 //                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
 //                        .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                                 .requestMatchers("/*").permitAll()
-                                .requestMatchers("/**").permitAll() // Permit access to /public/** without authentication
+                                .requestMatchers("/**").permitAll()
                                 .anyRequest().permitAll()
 
                 )

@@ -12,13 +12,13 @@ public class ReservationDto {
     private String email;
     @NotEmpty(message = "Street cannot be empty")
     private String street;
-    @NotEmpty(message = "Street number cannot be empty")
+
     private Integer streetNumber;
     @NotEmpty(message = "Zipcode cannot be empty")
     private String zipcode;
     @NotEmpty(message = "City cannot be empty")
     private String city;
-    @NotEmpty(message = "Amount cannot be empty")
+
     @Min(1)
     @Positive(message = "The amount needs to be higher then zero")
     private Integer amount;

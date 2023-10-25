@@ -24,7 +24,7 @@ public class RoleService {
 
         for (Role r : repos.findAll()) {
             RoleDto rdto = new RoleDto();
-            rdto.setRolename(r.getRolename());
+            rdto.setRoleName(r.getRoleName());
 
             roleDtos.add(rdto);
         }

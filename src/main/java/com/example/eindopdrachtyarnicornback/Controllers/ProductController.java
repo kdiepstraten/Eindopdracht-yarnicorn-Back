@@ -31,6 +31,7 @@ public class ProductController {
         return new ResponseEntity<>(wdto, HttpStatus.OK);
     }
 
+
     @PostMapping
     public ResponseEntity<ProductDto> createWool(@Valid @RequestBody ProductDto productDTO) {
         ProductDto newWool = productService.createWool(productDTO);

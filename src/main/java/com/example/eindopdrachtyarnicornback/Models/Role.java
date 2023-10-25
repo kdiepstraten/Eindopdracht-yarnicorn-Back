@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "roles")
 public class Role {
     @Id
-    private String rolename;
+    private String roleName;
 
 
     @ManyToMany(mappedBy = "roles")

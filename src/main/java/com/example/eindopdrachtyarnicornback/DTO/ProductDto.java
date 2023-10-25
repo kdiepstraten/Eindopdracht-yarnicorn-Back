@@ -17,8 +17,7 @@ public class ProductDto {
     private String blend;
     @Min(value = 1, message = "Needle size cannot be smaller then 1")
     @Max(value = 10,message = "Needle size cannot be higher then 10")
-    private Integer needlesize;
-
+    private Integer needleSize;
     @Min(value = 1, message = "Length needs to be at least 1")
     private Integer length;
     @NotEmpty(message = "Gauge cannot be empty")

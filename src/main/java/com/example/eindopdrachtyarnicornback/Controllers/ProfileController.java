@@ -17,6 +17,7 @@ public class ProfileController {
     public ProfileController(ProfileService profileService) {
         this.profileService = profileService;
     }
+
     @GetMapping
     public ResponseEntity<List<ProfileDto>> getAllProfile() {
         List<ProfileDto> pDto = profileService.getAllProfile();

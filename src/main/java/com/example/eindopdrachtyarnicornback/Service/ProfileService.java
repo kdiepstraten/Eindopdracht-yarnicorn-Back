@@ -37,18 +37,18 @@ public class ProfileService {
     private static void profileToProfileDto(Profile p, ProfileDto pDto) {
         pDto.setUsername(p.getUsername());
         pDto.setPassword(p.getPassword());
-        pDto.setConfirmPassword(p.getConfirmpassword());
-        pDto.setFirstName(p.getFirstname());
-        pDto.setLastName(p.getLastname());
+        pDto.setConfirmPassword(p.getConfirmPassword());
+        pDto.setFirstName(p.getFirstName());
+        pDto.setLastName(p.getLastName());
         pDto.setEmail(p.getEmail());
     }
 
     private void profileDtoToProfile(ProfileDto pDto, Profile p) {
         p.setUsername(pDto.getUsername());
         p.setPassword(pDto.getPassword());
-        p.setConfirmpassword(pDto.getConfirmPassword());
-        p.setFirstname(pDto.getFirstName());
-        p.setLastname(pDto.getLastName());
+        p.setConfirmPassword(pDto.getConfirmPassword());
+        p.setFirstName(pDto.getFirstName());
+        p.setLastName(pDto.getLastName());
         p.setEmail(pDto.getEmail());
     }
 

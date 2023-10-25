@@ -40,7 +40,7 @@ public class ProductService {
         wdto.setColor(w.getColor());
         wdto.setLength(w.getLength());
         wdto.setBlend(w.getBlend());
-        wdto.setNeedlesize(w.getNeedlesize());
+        wdto.setNeedleSize(w.getNeedleSize());
         wdto.setGauge(w.getGauge());
         wdto.setDescription(w.getDescription());
         wdto.setCategory(w.getCategory());
@@ -53,7 +53,7 @@ public class ProductService {
         product.setLength(productDTO.getLength());
         product.setGauge(productDTO.getGauge());
         product.setBlend(productDTO.getBlend());
-        product.setNeedlesize(productDTO.getNeedlesize());
+        product.setNeedleSize(productDTO.getNeedleSize());
         product.setDescription(productDTO.getDescription());
         product.setCategory(productDTO.getCategory());
     }
@@ -68,6 +68,8 @@ public class ProductService {
             throw new IdNotFoundException("wool not found with id: " + id);
         }
     }
+
+
 
     public ProductDto createWool(ProductDto productDTO) {
         Product product = new Product();

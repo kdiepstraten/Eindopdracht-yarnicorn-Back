@@ -7,11 +7,12 @@ import lombok.Data;
 @Entity
 public class Reservation {
     @Id
+    @GeneratedValue
     private Long id;
-    private String fullname;
+    private String fullName;
     private String email;
     private String street;
-    private Integer streetnumber;
+    private Integer streetNumber;
     private String zipcode;
     private String city;
     private Integer amount;

@@ -31,12 +31,12 @@ public class ReviewService {
 
     private static void reviewToReviewDto(Review r, ReviewDto rDto) {
         rDto.setReview(r.getReview());
-        rDto.setFullName(r.getFullname());
+        rDto.setFullName(r.getFullName());
     }
 
     private static void reviewDtoToReview(ReviewDto rDto, Review r) {
         r.setReview(rDto.getReview());
-        r.setFullname(rDto.getFullName());
+        r.setFullName(rDto.getFullName());
     }
 
     public ReviewDto createUser(ReviewDto reviewDto) {
