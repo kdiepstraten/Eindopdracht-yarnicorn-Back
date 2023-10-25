@@ -16,7 +16,7 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public List<ReviewDto> getAllUsers() {
+    public List<ReviewDto> getAllReviews() {
         List<Review> reviews = reviewRepository.findAll();
         List<ReviewDto> reviewDtos = new ArrayList<>();
 

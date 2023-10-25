@@ -19,7 +19,7 @@ public class ReviewController {
 
     @GetMapping
     public ResponseEntity<List<ReviewDto>> getAllReviews() {
-        List<ReviewDto> rDto = reviewService.getAllUsers();
+        List<ReviewDto> rDto = reviewService.getAllReviews();
         return new ResponseEntity<>(rDto, HttpStatus.OK);
     }
 
