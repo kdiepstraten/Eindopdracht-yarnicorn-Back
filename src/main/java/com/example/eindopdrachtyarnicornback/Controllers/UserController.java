@@ -28,8 +28,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createUser(@Valid @RequestBody UserDto userDto) {
-        String result = userService.createUser(userDto);
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
+        UserDto result = userService.createUser(userDto);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

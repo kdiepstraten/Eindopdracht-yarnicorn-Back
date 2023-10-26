@@ -53,7 +53,7 @@ public class UserService {
         u.setUsername(uDto.getUsername());
         u.setPassword(uDto.getPassword());
     }
-    public String createUser(UserDto userDto) {
+    public UserDto createUser(UserDto userDto) {
         User newUser = new User();
         newUser.setUsername(userDto.getUsername());
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
@@ -66,8 +66,10 @@ public class UserService {
             }
         }
         userRepository.save(newUser);
+        UserDto udto = new UserDto();
+        userToUserDto(newUser, udto);
 
-        return "User created";
+        return udto;
     }
 }
 
