@@ -20,29 +20,27 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> getAllWool() {
-        List<ProductDto> wdto = productService.getAllWool();
-        return new ResponseEntity<>(wdto, HttpStatus.OK);
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
+        List<ProductDto> pdto = productService.getAllProducts();
+        return new ResponseEntity<>(pdto, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getOneWool(@PathVariable Long id) {
-        ProductDto wdto = productService.getWool(id);
-        return new ResponseEntity<>(wdto, HttpStatus.OK);
+    public ResponseEntity<ProductDto> getOneProduct(@PathVariable Long id) {
+        ProductDto pdto = productService.getProduct(id);
+        return new ResponseEntity<>(pdto, HttpStatus.OK);
     }
 
-
     @PostMapping
-    public ResponseEntity<ProductDto> createWool(@Valid @RequestBody ProductDto productDTO) {
-        ProductDto newWool = productService.createWool(productDTO);
-        return new ResponseEntity<>(newWool, HttpStatus.CREATED);
+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDTO) {
+        ProductDto newProduct = productService.createProduct(productDTO);
+        return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProductDto> deleteWool(@PathVariable Long id) {
-        productService.deleteWool(id);
+    public ResponseEntity<ProductDto> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
 }

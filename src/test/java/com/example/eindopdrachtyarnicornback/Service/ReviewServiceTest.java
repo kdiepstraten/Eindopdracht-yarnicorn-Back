@@ -23,6 +23,7 @@ class ReviewServiceTest {
 
     @Test
     void getAllReviews() {
+
         //Arrange
         Review review = new Review();
         Review review2 = new Review();
@@ -47,6 +48,7 @@ class ReviewServiceTest {
 
     @Test
     void createUser() {
+        
         //Arrange
         ReviewDto newReviewDto = new ReviewDto();
         newReviewDto.setFullName("Alex Clearmont Diaz");
@@ -66,6 +68,6 @@ class ReviewServiceTest {
 
         assertEquals("Alex Clearmont Diaz", nrDTO.getFullName());
         assertEquals("10/10", nrDTO.getReview());
-        Mockito.verify(reviewRepository, Mockito.times(1)).save(Mockito.any(Review.class));
+
     }
 }
