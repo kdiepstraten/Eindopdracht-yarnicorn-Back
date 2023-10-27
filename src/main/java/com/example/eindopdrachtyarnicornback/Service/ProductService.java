@@ -20,32 +20,32 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<ProductDto> getAllWool(){
+    public List<ProductDto> getAllProducts(){
 
         List<Product> products = productRepository.findAll();
         List<ProductDto> productDtos = new ArrayList<>();
 
-        for (Product w : products) {
-            ProductDto wdto = new ProductDto();
-            woolToWoolDTO(w, wdto);
+        for (Product p : products) {
+            ProductDto pdto = new ProductDto();
+            productToProductDTO(p, pdto);
 
-            productDtos.add(wdto);
+            productDtos.add(pdto);
         }
         return productDtos;
     }
 
-    private static void woolToWoolDTO(Product w, ProductDto wdto) {
-        wdto.setName(w.getName());
-        wdto.setBrand(w.getBrand());
-        wdto.setColor(w.getColor());
-        wdto.setLength(w.getLength());
-        wdto.setBlend(w.getBlend());
-        wdto.setNeedlesize(w.getNeedlesize());
-        wdto.setGauge(w.getGauge());
-        wdto.setDescription(w.getDescription());
-        wdto.setCategory(w.getCategory());
+    private static void productToProductDTO(Product p, ProductDto pdto) {
+        pdto.setName(p.getName());
+        pdto.setBrand(p.getBrand());
+        pdto.setColor(p.getColor());
+        pdto.setLength(p.getLength());
+        pdto.setBlend(p.getBlend());
+        pdto.setNeedlesize(p.getNeedlesize());
+        pdto.setGauge(p.getGauge());
+        pdto.setDescription(p.getDescription());
+        pdto.setCategory(p.getCategory());
     }
-    private void woolDTOToWool(ProductDto productDTO, Product product) {
+    private void productDTOToProduct(ProductDto productDTO, Product product) {
 
         product.setName(productDTO.getName());
         product.setBrand(productDTO.getBrand());
@@ -57,19 +57,19 @@ public class ProductService {
         product.setDescription(productDTO.getDescription());
         product.setCategory(productDTO.getCategory());
     }
-    public ProductDto getWool(Long id) {
+    public ProductDto getOneProduct(Long id) {
         Optional<Product> wool = productRepository.findById(id);
         if (wool.isPresent()){
             Product w = wool.get();
             ProductDto wdto = new ProductDto();
-            woolToWoolDTO(w, wdto);
+            productDTOToProduct(w, wdto);
             return (wdto);
         } else {
             throw new IdNotFoundException("wool not found with id: " + id);
         }
     }
 
-    public ProductDto createWool(ProductDto productDTO) {
+    public ProductDto createProduct(ProductDto productDTO) {
         Product product = new Product();
         woolDTOToWool(productDTO, product);
 
@@ -81,7 +81,7 @@ public class ProductService {
         return savedProductDto;
     }
 
-    public String deleteWool(@RequestBody Long id){
+    public String deleteProduct(@RequestBody Long id){
 
         productRepository.deleteById(id);
         return "Product deleted";

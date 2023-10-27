@@ -18,8 +18,8 @@ public class Reservation {
     private String comment;
 
 //    Relation with Products OneToOne.
-    @OneToOne(mappedBy = "reservation")
-    Product product;
+    @OneToOne
+    private Product product;
 
 //    Relation with Profile ManyToOne.
     @ManyToOne

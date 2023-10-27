@@ -23,8 +23,8 @@ public class Product {
     private String category;
 
 //    Relation with Reservation OneToOne. Product is the primary
-    @OneToOne
-    Reservation reservation;
+    @OneToOne(mappedBy = "product")
+    private Reservation reservation;
 
 //    Relation with Profile.
     @ManyToMany(mappedBy = "products")
