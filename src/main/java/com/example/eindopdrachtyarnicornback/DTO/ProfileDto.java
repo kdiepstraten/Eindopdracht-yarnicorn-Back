@@ -22,4 +22,5 @@ public class ProfileDto {
     private String lastName;
     @Email(message = "This needs to be an email address")
     private String email;
+    private String[] roles;
 }

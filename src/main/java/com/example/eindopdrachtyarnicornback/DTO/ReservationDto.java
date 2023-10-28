@@ -24,5 +24,6 @@ public class ReservationDto {
     private Integer amount;
     @NotEmpty(message = "Comment cannot be empty")
     private String comment;
+//    private ProductDto productDto;
 
 }

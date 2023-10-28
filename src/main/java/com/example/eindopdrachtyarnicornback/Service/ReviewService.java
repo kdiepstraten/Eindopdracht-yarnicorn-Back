@@ -39,7 +39,7 @@ public class ReviewService {
         r.setFullName(rDto.getFullName());
     }
 
-    public ReviewDto createUser(ReviewDto reviewDto) {
+    public ReviewDto createReview(ReviewDto reviewDto) {
         Review review = new Review();
         reviewDtoToReview(reviewDto, review);
 

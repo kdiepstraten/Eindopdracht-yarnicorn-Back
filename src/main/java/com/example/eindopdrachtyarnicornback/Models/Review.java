@@ -16,6 +16,6 @@ public class Review {
     private String review;
 
 //    Relation with Profile ManyToOne.
-    @ManyToOne
-    Profile profile;
+//    @ManyToOne
+//    Profile profile;
 }

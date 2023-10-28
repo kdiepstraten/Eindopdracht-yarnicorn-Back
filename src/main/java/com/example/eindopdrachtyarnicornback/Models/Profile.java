@@ -20,7 +20,7 @@ public class Profile {
 
     //TODO: in DB table users profileID is null.
 //    Relation with User OneToOne.
-    @OneToOne(mappedBy = "profile")
+    @OneToOne
     User user;
 
 //    Relation with Reservation OneToMany.

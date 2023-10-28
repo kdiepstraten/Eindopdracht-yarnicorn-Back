@@ -1,7 +1,10 @@
 package com.example.eindopdrachtyarnicornback.Service;
+import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.DTO.UserDto;
+import com.example.eindopdrachtyarnicornback.Models.Profile;
 import com.example.eindopdrachtyarnicornback.Models.Role;
 import com.example.eindopdrachtyarnicornback.Models.User;
+import com.example.eindopdrachtyarnicornback.Repository.ProfileRepository;
 import com.example.eindopdrachtyarnicornback.Repository.RoleRepository;
 import com.example.eindopdrachtyarnicornback.Repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,12 +21,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+private final ProfileRepository profileRepository;
 
-
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository, ProfileRepository profileRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.profileRepository = profileRepository;
     }
 
 
@@ -70,6 +74,43 @@ public class UserService {
         userToUserDto(newUser, udto);
 
         return udto;
+    }
+
+    public UserDto createUserWithProfile(ProfileDto profileDto) {
+        // Extract user-related data from the DTO
+        UserDto userDto = new UserDto();
+        userDto.setUsername(profileDto.getUsername());
+        userDto.setPassword(profileDto.getPassword());
+        userDto.setRoles(profileDto.getRoles());
+
+        // Create a User entity and set its properties
+        User user = new User();
+        userDtoToUser(user, userDto);
+
+        // Create a Profile entity and set its properties
+        Profile profile = new Profile();
+        profileDtoToProfile(profileDto, profile);
+
+        // Establish the one-to-one relationship between User and Profile
+        user.setProfile(profile);
+
+        // Save both User and Profile entities
+        profileRepository.save(profile);
+        userRepository.save(user);
+
+        // Map the saved User entity to a UserDto
+        UserDto savedUserDto = new UserDto();
+        userToUserDto(user, savedUserDto);
+
+        return savedUserDto;
+    }
+    private void profileDtoToProfile(ProfileDto pDto, Profile p) {
+        p.setUsername(pDto.getUsername());
+        p.setPassword(pDto.getPassword());
+        p.setConfirmPassword(pDto.getConfirmPassword());
+        p.setFirstName(pDto.getFirstName());
+        p.setLastName(pDto.getLastName());
+        p.setEmail(pDto.getEmail());
     }
 }
 

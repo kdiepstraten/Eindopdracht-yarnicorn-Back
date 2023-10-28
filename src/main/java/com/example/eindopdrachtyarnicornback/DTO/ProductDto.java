@@ -26,5 +26,6 @@ public class ProductDto {
     private String description;
     @NotEmpty(message = "Catagory cannot be empty")
     private String category;
+//    private ReservationDto reservationDto;
 
 }

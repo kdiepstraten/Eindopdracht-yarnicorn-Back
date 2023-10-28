@@ -62,7 +62,7 @@ class ReviewServiceTest {
 
         //Act
 
-        ReviewDto nrDTO = reviewService.createUser(newReviewDto);
+        ReviewDto nrDTO = reviewService.createReview(newReviewDto);
 
         //Assert
 
