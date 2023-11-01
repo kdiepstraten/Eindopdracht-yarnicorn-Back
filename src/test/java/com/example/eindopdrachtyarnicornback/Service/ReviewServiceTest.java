@@ -47,7 +47,7 @@ class ReviewServiceTest {
     }
 
     @Test
-    void createUser() {
+    void createReview() {
         
         //Arrange
         ReviewDto newReviewDto = new ReviewDto();

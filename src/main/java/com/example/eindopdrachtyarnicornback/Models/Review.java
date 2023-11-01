@@ -15,7 +15,4 @@ public class Review {
     private String fullName;
     private String review;
 
-//    Relation with Profile ManyToOne.
-//    @ManyToOne
-//    Profile profile;
 }

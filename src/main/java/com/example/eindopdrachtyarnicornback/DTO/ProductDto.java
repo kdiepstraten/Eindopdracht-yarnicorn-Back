@@ -3,6 +3,8 @@ package com.example.eindopdrachtyarnicornback.DTO;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ProductDto {
 
@@ -26,6 +28,6 @@ public class ProductDto {
     private String description;
     @NotEmpty(message = "Catagory cannot be empty")
     private String category;
-//    private ReservationDto reservationDto;
+
 
 }

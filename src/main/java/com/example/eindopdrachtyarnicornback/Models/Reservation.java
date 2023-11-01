@@ -3,6 +3,8 @@ package com.example.eindopdrachtyarnicornback.Models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class Reservation {
@@ -18,11 +20,9 @@ public class Reservation {
     private Integer amount;
     private String comment;
 
-//    Relation with Products OneToOne.
-    @OneToOne(mappedBy = "reservation")
-    Product product;
-
-//    Relation with Profile ManyToOne.
+    //    Relation with Products OneToOne.
     @ManyToOne
-    Profile profile;
+    @JoinColumn(name = "product_id")
+    private Product product;
+
 }

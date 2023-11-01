@@ -63,7 +63,7 @@ class UserServiceTest {
 //
 //        Mockito.when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 //
-//        UserDto userDTO = userService.createUser(userDto);
+//        UserDto userDTO = userService.createUserWithProfile(userDto);
 //
 //        assertEquals("Jake", userDTO.getUsername());
 //        assertEquals("hellofromthemountain", userDTO.getPassword());

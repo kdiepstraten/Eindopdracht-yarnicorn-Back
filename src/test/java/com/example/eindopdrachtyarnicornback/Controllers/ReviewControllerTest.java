@@ -43,6 +43,7 @@ class ReviewControllerTest {
 
     @Test
     void getAllReviews() throws Exception {
+
         ReviewDto rdto = new ReviewDto();
         rdto.setFullName("Tom Holland");
         rdto.setReview("Jeez what a great site!");
@@ -54,7 +55,6 @@ class ReviewControllerTest {
         List<ReviewDto> reviewDtoList = new ArrayList<>();
         reviewDtoList.add(rdto);
         reviewDtoList.add(rdto2);
-
 
         Mockito.when(reviewService.getAllReviews()).thenReturn(reviewDtoList);
 
@@ -78,7 +78,7 @@ class ReviewControllerTest {
         review.setReview("This is amazing!!");
 
         reviewRepository.save(review);
-//TODO: The Repository is empty after the Mockito.when. After debug the review is saved in the repository.
+
         ReviewDto rdto = new ReviewDto();
         rdto.setFullName(review.getFullName());
         rdto.setReview(review.getReview());
@@ -87,10 +87,11 @@ class ReviewControllerTest {
 
 
         this.mockMvc
-                .perform(MockMvcRequestBuilders.post("/review"))
+                .perform(MockMvcRequestBuilders.post("/review").content("{\"fullName\" : \"Jake\",\n" +
+                        "\t\"review\" : \"This is amazing!!\"}").contentType("application/json"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.fullName").value("John Doe"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.review").value("Great review!"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.fullName").value("Jake"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.review").value("This is amazing!!"));
     }
 }

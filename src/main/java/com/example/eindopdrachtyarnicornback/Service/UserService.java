@@ -1,4 +1,5 @@
 package com.example.eindopdrachtyarnicornback.Service;
+
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.DTO.UserDto;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
@@ -21,7 +22,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-private final ProfileRepository profileRepository;
+    private final ProfileRepository profileRepository;
 
     public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository, ProfileRepository profileRepository) {
         this.passwordEncoder = passwordEncoder;
@@ -48,62 +49,58 @@ private final ProfileRepository profileRepository;
         uDto.setUsername(u.getUsername());
         uDto.setPassword(u.getPassword());
         ArrayList<String> roles = new ArrayList<>();
-        for (Role role : u.getRoles()){
+        for (Role role : u.getRoles()) {
             roles.add(role.getRoleName());
         }
-        uDto.setRoles(roles.toArray(new String [0]));
+        uDto.setRoles(roles.toArray(new String[0]));
     }
+
     private static void userDtoToUser(User u, UserDto uDto) {
         u.setUsername(uDto.getUsername());
         u.setPassword(uDto.getPassword());
     }
-    public UserDto createUser(UserDto userDto) {
-        User newUser = new User();
-        newUser.setUsername(userDto.getUsername());
-        newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        List<Role> userRoles = newUser.getRoles();
-        for (String rolename : userDto.getRoles()) {
+
+    public UserDto createUserWithProfile(ProfileDto profileDto) {
+
+        // User gedeelte van de ProfileDTO
+        UserDto userDto = new UserDto();
+        userDto.setUsername(profileDto.getUsername());
+        userDto.setPassword(passwordEncoder.encode(profileDto.getPassword()));
+
+        User user = new User();
+    if (profileDto.getRoles() != null) {
+        List<Role> userRoles = new ArrayList<>();
+        for (String rolename : profileDto.getRoles()) {
             Optional<Role> or = roleRepository.findById("ROLE_" + rolename);
             if (or.isPresent()) {
                 userRoles.add(or.get());
             }
         }
-        userRepository.save(newUser);
-        UserDto udto = new UserDto();
-        userToUserDto(newUser, udto);
 
-        return udto;
-    }
-
-    public UserDto createUserWithProfile(ProfileDto profileDto) {
-        // Extract user-related data from the DTO
-        UserDto userDto = new UserDto();
-        userDto.setUsername(profileDto.getUsername());
-        userDto.setPassword(profileDto.getPassword());
-        userDto.setRoles(profileDto.getRoles());
-
-        // Create a User entity and set its properties
-        User user = new User();
+        // Aanmaken User
         userDtoToUser(user, userDto);
-
-        // Create a Profile entity and set its properties
+        user.setRoles(userRoles);
+    }
+        // Aanmaken Profile
         Profile profile = new Profile();
         profileDtoToProfile(profileDto, profile);
 
-        // Establish the one-to-one relationship between User and Profile
+        // OneToOne relatie tussen User en Profile
         user.setProfile(profile);
 
-        // Save both User and Profile entities
+        // Beide opslaan in Repository
         profileRepository.save(profile);
         userRepository.save(user);
 
-        // Map the saved User entity to a UserDto
+        // User -> UserDTO om terug te geven naar de controller
         UserDto savedUserDto = new UserDto();
         userToUserDto(user, savedUserDto);
 
         return savedUserDto;
     }
+
+
     private void profileDtoToProfile(ProfileDto pDto, Profile p) {
         p.setUsername(pDto.getUsername());
         p.setPassword(pDto.getPassword());

@@ -18,20 +18,8 @@ public class Profile {
     private String lastName;
     private String email;
 
-    //TODO: in DB table users profileID is null.
+
 //    Relation with User OneToOne.
     @OneToOne
     User user;
-
-//    Relation with Reservation OneToMany.
-    @OneToMany(mappedBy = "profile")
-    List<Reservation> reservations;
-
-//    Relation with Product ManyToMany.
-    @ManyToMany
-    List<Product> products;
-
-//    Relation with Review OneToMany.
-    @OneToMany
-    List<Review> review;
 }
