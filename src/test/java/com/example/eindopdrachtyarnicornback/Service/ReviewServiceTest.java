@@ -47,7 +47,7 @@ class ReviewServiceTest {
     }
 
     @Test
-    void createUser() {
+    void createReview() {
         
         //Arrange
         ReviewDto newReviewDto = new ReviewDto();
@@ -62,7 +62,7 @@ class ReviewServiceTest {
 
         //Act
 
-        ReviewDto nrDTO = reviewService.createUser(newReviewDto);
+        ReviewDto nrDTO = reviewService.createReview(newReviewDto);
 
         //Assert
 

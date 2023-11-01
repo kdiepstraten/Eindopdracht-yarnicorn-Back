@@ -20,7 +20,7 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<ReservationDto> createReservation(@Valid @RequestBody ReservationDto reservationDto) {
-        ReservationDto rdto = reservationService.createReservation(reservationDto);
+        ReservationDto rdto = reservationService.createReservation(reservationDto, reservationDto.getProductId());
         return new ResponseEntity<>(rdto, HttpStatus.CREATED);
     }
 

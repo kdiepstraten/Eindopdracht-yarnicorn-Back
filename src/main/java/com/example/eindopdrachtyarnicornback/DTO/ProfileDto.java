@@ -20,6 +20,9 @@ public class ProfileDto {
     private String firstName;
     @NotEmpty(message = "Last name cannot be empty")
     private String lastName;
+    @NotEmpty(message = "Email cannot be empty")
     @Email(message = "This needs to be an email address")
     private String email;
+    @NotEmpty(message = "There needs to be a role")
+    private String[] roles;
 }

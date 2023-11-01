@@ -3,6 +3,7 @@ package com.example.eindopdrachtyarnicornback.Service;
 import com.example.eindopdrachtyarnicornback.DTO.ProductDto;
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Product;
+import com.example.eindopdrachtyarnicornback.Models.Reservation;
 import com.example.eindopdrachtyarnicornback.Repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,6 +73,11 @@ public class ProductService {
     public ProductDto createProduct(ProductDto productDTO) {
         Product product = new Product();
         productDTOToProduct(productDTO, product);
+
+//        Reservation reservation = new Reservation();
+//        reservation.setProduct(product);
+//        reservation.setFullName();
+
 
         Product savedProduct = productRepository.save(product);
 
