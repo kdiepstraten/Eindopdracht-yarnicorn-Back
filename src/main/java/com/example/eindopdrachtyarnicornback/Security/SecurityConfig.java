@@ -3,6 +3,7 @@ package com.example.eindopdrachtyarnicornback.Security;
 import com.example.eindopdrachtyarnicornback.Repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -50,11 +51,15 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
 
-//                        .requestMatchers(HttpMethod.GET, "/*").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-                                .requestMatchers("/*").permitAll()
-                                .requestMatchers("/**").permitAll()
+//                        .requestMatchers("/*").hasRole("ADMIN")
+//                        .requestMatchers("/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/review").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.POST, "/review").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/users").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/reservation").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/reservation").hasAnyRole("ADMIN", "USER")
                                 .anyRequest().permitAll()
 
                 )

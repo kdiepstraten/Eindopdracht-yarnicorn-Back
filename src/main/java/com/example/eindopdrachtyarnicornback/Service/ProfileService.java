@@ -3,10 +3,15 @@ package com.example.eindopdrachtyarnicornback.Service;
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
+import com.example.eindopdrachtyarnicornback.Models.User;
 import com.example.eindopdrachtyarnicornback.Repository.ProfileRepository;
+import com.example.eindopdrachtyarnicornback.Repository.RoleRepository;
+import com.example.eindopdrachtyarnicornback.Repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.eindopdrachtyarnicornback.Models.Role;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +20,14 @@ import java.util.Optional;
 public class ProfileService {
 
     private final ProfileRepository profileRepository;
-
-    public ProfileService(ProfileRepository profileRepository) {
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    public ProfileService(ProfileRepository profileRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
         this.profileRepository = profileRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
 
@@ -68,8 +78,18 @@ public class ProfileService {
         Profile profile = new Profile();
         profileDtoToProfile(profileDto, profile);
 
+        if (profileDto.getRoles() != null) {
+            List<Role> userRoles = new ArrayList<>();
+            for (String rolename : profileDto.getRoles()) {
+                Optional<Role> role = roleRepository.findById("ROLE_" + rolename);
+                role.ifPresent(userRoles::add);
+            }
+            // Assuming you have a way to associate these roles with the User entity if needed
+        }
+
         Profile savedProfile = profileRepository.save(profile);
 
+        // Create and return a ProfileDto based on the savedProfile
         ProfileDto savedProfileDto = new ProfileDto();
         profileToProfileDto(savedProfile, savedProfileDto);
 
