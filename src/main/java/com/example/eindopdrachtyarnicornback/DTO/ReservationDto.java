@@ -23,7 +23,7 @@ public class ReservationDto {
     private Integer amount;
     @NotEmpty(message = "Comment cannot be empty")
     private String comment;
-    @NotEmpty(message = "ProductId cannot be empty")
+    @NotNull(message = "ProductId cannot be empty")
     private Long productId;
 
 }

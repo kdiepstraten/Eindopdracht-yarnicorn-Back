@@ -17,7 +17,7 @@ public class Profile {
     private String firstName;
     private String lastName;
     private String email;
-
+    private List<String> roles;
 
 //    Relation with User OneToOne.
     @OneToOne
