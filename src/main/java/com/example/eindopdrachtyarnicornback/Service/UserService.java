@@ -87,11 +87,11 @@ public class UserService {
         profileDtoToProfile(profileDto, profile);
 
         // OneToOne relatie tussen User en Profile
-        user.setProfile(profile);
+        profile.setUser(user);
 
         // Beide opslaan in Repository
-        profileRepository.save(profile);
         userRepository.save(user);
+        profileRepository.save(profile);
 
         // User -> UserDTO om terug te geven naar de controller
         UserDto savedUserDto = new UserDto();
@@ -102,9 +102,9 @@ public class UserService {
 
 
     private void profileDtoToProfile(ProfileDto pDto, Profile p) {
-        p.setUsername(pDto.getUsername());
-        p.setPassword(pDto.getPassword());
-        p.setConfirmPassword(pDto.getConfirmPassword());
+//        p.setUsername(pDto.getUsername());
+//        p.setPassword(pDto.getPassword());
+//        p.setConfirmPassword(pDto.getConfirmPassword());
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());
         p.setEmail(pDto.getEmail());

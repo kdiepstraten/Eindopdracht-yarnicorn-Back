@@ -18,6 +18,7 @@ public class ReviewService {
 
     public List<ReviewDto> getAllReviews() {
         List<Review> reviews = reviewRepository.findAll();
+
         List<ReviewDto> reviewDtos = new ArrayList<>();
 
         for (Review r : reviews) {

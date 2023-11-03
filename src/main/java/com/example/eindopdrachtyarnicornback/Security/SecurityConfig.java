@@ -51,8 +51,6 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
 
-//                        .requestMatchers("/*").hasRole("ADMIN")
-//                        .requestMatchers("/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/review").hasAnyRole("ADMIN", "USER")
                                 .requestMatchers(HttpMethod.POST, "/review").hasAnyRole("ADMIN", "USER")
                                 .requestMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")

@@ -45,18 +45,12 @@ public class ProfileService {
     }
 
     private static void profileToProfileDto(Profile p, ProfileDto pDto) {
-        pDto.setUsername(p.getUsername());
-        pDto.setPassword(p.getPassword());
-        pDto.setConfirmPassword(p.getConfirmPassword());
         pDto.setFirstName(p.getFirstName());
         pDto.setLastName(p.getLastName());
         pDto.setEmail(p.getEmail());
     }
 
     private void profileDtoToProfile(ProfileDto pDto, Profile p) {
-        p.setUsername(pDto.getUsername());
-        p.setPassword(pDto.getPassword());
-        p.setConfirmPassword(pDto.getConfirmPassword());
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());
         p.setEmail(pDto.getEmail());
@@ -78,14 +72,6 @@ public class ProfileService {
         Profile profile = new Profile();
         profileDtoToProfile(profileDto, profile);
 
-        if (profileDto.getRoles() != null) {
-            List<Role> userRoles = new ArrayList<>();
-            for (String rolename : profileDto.getRoles()) {
-                Optional<Role> role = roleRepository.findById("ROLE_" + rolename);
-                role.ifPresent(userRoles::add);
-            }
-            // Assuming you have a way to associate these roles with the User entity if needed
-        }
 
         Profile savedProfile = profileRepository.save(profile);
 

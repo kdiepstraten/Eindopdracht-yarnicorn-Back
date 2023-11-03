@@ -35,6 +35,20 @@ public class ProductService {
         return productDtos;
     }
 
+    public List<ProductDto> getProductsByCategory(String category) {
+        List<Product> products = productRepository.findByCategory(category);
+        List<ProductDto> productDtos = new ArrayList<>();
+
+        for (Product p : products) {
+            ProductDto pdto = new ProductDto();
+            productToProductDTO(p, pdto);
+            productDtos.add(pdto);
+        }
+
+        return productDtos;
+    }
+
+
     private static void productToProductDTO(Product p, ProductDto pdto) {
         pdto.setName(p.getName());
         pdto.setBrand(p.getBrand());
