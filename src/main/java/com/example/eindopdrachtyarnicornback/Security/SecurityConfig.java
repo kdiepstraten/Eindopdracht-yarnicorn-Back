@@ -68,6 +68,9 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/profile/{id}").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/profile").hasAnyRole("ADMIN", "USER")
                                 .requestMatchers(HttpMethod.DELETE, "/profile/{id}").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").hasAnyRole("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
                                 .anyRequest().permitAll()
 
                 )
