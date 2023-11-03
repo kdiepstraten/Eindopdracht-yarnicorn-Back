@@ -1,5 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
+import com.example.eindopdrachtyarnicornback.DTO.ProfileAndUserDto;
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.DTO.UserDto;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
@@ -61,7 +62,7 @@ public class UserService {
     }
 
 
-    public UserDto createUserWithProfile(ProfileDto profileDto) {
+    public UserDto createUserWithProfile(ProfileAndUserDto profileDto) {
 
         // User gedeelte van de ProfileDTO
         UserDto userDto = new UserDto();
@@ -101,7 +102,7 @@ public class UserService {
     }
 
 
-    private void profileDtoToProfile(ProfileDto pDto, Profile p) {
+    private void profileDtoToProfile(ProfileAndUserDto pDto, Profile p) {
 //        p.setUsername(pDto.getUsername());
 //        p.setPassword(pDto.getPassword());
 //        p.setConfirmPassword(pDto.getConfirmPassword());

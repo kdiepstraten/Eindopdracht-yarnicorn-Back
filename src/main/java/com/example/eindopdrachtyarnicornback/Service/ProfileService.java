@@ -1,5 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
+import com.example.eindopdrachtyarnicornback.DTO.ProfileAndUserDto;
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
@@ -68,9 +69,9 @@ public class ProfileService {
         }
     }
 
-    public ProfileDto createProfile(ProfileDto profileDto) {
+    public ProfileDto createProfile(ProfileAndUserDto profileAndUserDto) {
         Profile profile = new Profile();
-        profileDtoToProfile(profileDto, profile);
+        profileAndUserDtoToProfile(profileAndUserDto, profile);
 
 
         Profile savedProfile = profileRepository.save(profile);
@@ -87,4 +88,10 @@ public class ProfileService {
 
         return "Profile deleted";
     }
+    private void profileAndUserDtoToProfile(ProfileAndUserDto pDto, Profile p) {
+        p.setFirstName(pDto.getFirstName());
+        p.setLastName(pDto.getLastName());
+        p.setEmail(pDto.getEmail());
+    }
+
 }
