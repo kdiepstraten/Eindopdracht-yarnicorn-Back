@@ -18,6 +18,7 @@ public class ReviewService {
 
     public List<ReviewDto> getAllReviews() {
         List<Review> reviews = reviewRepository.findAll();
+
         List<ReviewDto> reviewDtos = new ArrayList<>();
 
         for (Review r : reviews) {
@@ -32,6 +33,7 @@ public class ReviewService {
     private static void reviewToReviewDto(Review r, ReviewDto rDto) {
         rDto.setReview(r.getReview());
         rDto.setFullName(r.getFullName());
+        rDto.setId(r.getId());
     }
 
     private static void reviewDtoToReview(ReviewDto rDto, Review r) {

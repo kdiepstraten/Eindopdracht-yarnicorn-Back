@@ -1,5 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
+import com.example.eindopdrachtyarnicornback.DTO.ProfileAndUserDto;
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.DTO.UserDto;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
@@ -61,7 +62,7 @@ public class UserService {
     }
 
 
-    public UserDto createUserWithProfile(ProfileDto profileDto) {
+    public UserDto createUserWithProfile(ProfileAndUserDto profileDto) {
 
         // User gedeelte van de ProfileDTO
         UserDto userDto = new UserDto();
@@ -78,22 +79,22 @@ public class UserService {
             }
         }
 
-        // Aanmaken User
+
         userDtoToUser(user, userDto);
         user.setRoles(userRoles);
     }
-        // Aanmaken Profile
+
         Profile profile = new Profile();
         profileDtoToProfile(profileDto, profile);
 
-        // OneToOne relatie tussen User en Profile
+
+        profile.setUser(user);
         user.setProfile(profile);
 
-        // Beide opslaan in Repository
-        profileRepository.save(profile);
         userRepository.save(user);
+        profileRepository.save(profile);
 
-        // User -> UserDTO om terug te geven naar de controller
+
         UserDto savedUserDto = new UserDto();
         userToUserDto(user, savedUserDto);
 
@@ -101,10 +102,10 @@ public class UserService {
     }
 
 
-    private void profileDtoToProfile(ProfileDto pDto, Profile p) {
-        p.setUsername(pDto.getUsername());
-        p.setPassword(pDto.getPassword());
-        p.setConfirmPassword(pDto.getConfirmPassword());
+    private void profileDtoToProfile(ProfileAndUserDto pDto, Profile p) {
+//        p.setUsername(pDto.getUsername());
+//        p.setPassword(pDto.getPassword());
+//        p.setConfirmPassword(pDto.getConfirmPassword());
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());
         p.setEmail(pDto.getEmail());

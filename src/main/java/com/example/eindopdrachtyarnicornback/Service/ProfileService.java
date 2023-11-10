@@ -1,5 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
+import com.example.eindopdrachtyarnicornback.DTO.ProfileAndUserDto;
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
@@ -45,18 +46,13 @@ public class ProfileService {
     }
 
     private static void profileToProfileDto(Profile p, ProfileDto pDto) {
-        pDto.setUsername(p.getUsername());
-        pDto.setPassword(p.getPassword());
-        pDto.setConfirmPassword(p.getConfirmPassword());
         pDto.setFirstName(p.getFirstName());
         pDto.setLastName(p.getLastName());
         pDto.setEmail(p.getEmail());
+        pDto.setId(p.getId());
     }
 
     private void profileDtoToProfile(ProfileDto pDto, Profile p) {
-        p.setUsername(pDto.getUsername());
-        p.setPassword(pDto.getPassword());
-        p.setConfirmPassword(pDto.getConfirmPassword());
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());
         p.setEmail(pDto.getEmail());
@@ -74,18 +70,10 @@ public class ProfileService {
         }
     }
 
-    public ProfileDto createProfile(ProfileDto profileDto) {
+    public ProfileDto createProfile(ProfileAndUserDto profileAndUserDto) {
         Profile profile = new Profile();
-        profileDtoToProfile(profileDto, profile);
+        profileAndUserDtoToProfile(profileAndUserDto, profile);
 
-        if (profileDto.getRoles() != null) {
-            List<Role> userRoles = new ArrayList<>();
-            for (String rolename : profileDto.getRoles()) {
-                Optional<Role> role = roleRepository.findById("ROLE_" + rolename);
-                role.ifPresent(userRoles::add);
-            }
-            // Assuming you have a way to associate these roles with the User entity if needed
-        }
 
         Profile savedProfile = profileRepository.save(profile);
 
@@ -101,4 +89,10 @@ public class ProfileService {
 
         return "Profile deleted";
     }
+    private void profileAndUserDtoToProfile(ProfileAndUserDto pDto, Profile p) {
+        p.setFirstName(pDto.getFirstName());
+        p.setLastName(pDto.getLastName());
+        p.setEmail(pDto.getEmail());
+    }
+
 }

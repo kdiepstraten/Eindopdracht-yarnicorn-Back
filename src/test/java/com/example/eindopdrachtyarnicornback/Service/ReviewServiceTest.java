@@ -57,6 +57,7 @@ class ReviewServiceTest {
         Review newReview = new Review();
         newReview.setFullName(newReviewDto.getFullName());
         newReview.setReview(newReviewDto.getReview());
+        newReview.setId(1L);
 
         Mockito.when(reviewRepository.save(Mockito.any(Review.class))).thenReturn(newReview);
 
@@ -68,6 +69,7 @@ class ReviewServiceTest {
 
         assertEquals("Alex Clearmont Diaz", nrDTO.getFullName());
         assertEquals("10/10", nrDTO.getReview());
+        assertEquals(1L, nrDTO.getId());
 
     }
 }

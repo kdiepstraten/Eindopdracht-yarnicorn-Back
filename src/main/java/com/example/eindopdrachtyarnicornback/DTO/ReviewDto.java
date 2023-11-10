@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class ReviewDto {
+    private Long id;
     @NotEmpty (message = "Full name cannot be empty")
     private String fullName;
     @NotEmpty (message = "Review cannot be empty")

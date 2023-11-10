@@ -31,6 +31,13 @@ public class ProductController {
         return new ResponseEntity<>(pdto, HttpStatus.OK);
     }
 
+    @GetMapping("/byCategory")
+    public ResponseEntity<List<ProductDto>> getProductsByCategory(@RequestParam String category) {
+        List<ProductDto> pdto = productService.getProductsByCategory(category);
+        return new ResponseEntity<>(pdto, HttpStatus.OK);
+    }
+
+
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDTO) {
         ProductDto newProduct = productService.createProduct(productDTO);

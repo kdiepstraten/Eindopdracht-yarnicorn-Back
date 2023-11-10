@@ -26,17 +26,13 @@ class ProfileServiceTest {
     @Test
     void getAllProfile() {
         Profile profile1 = new Profile();
-        profile1.setUsername("Taylor");
-        profile1.setPassword("helloimTaylor");
-        profile1.setConfirmPassword("helloimTaylor");
+
         profile1.setFirstName("Taylor");
         profile1.setLastName("Zakhar Perez");
         profile1.setEmail("tperez@gmail.com");
 
         Profile profile2 = new Profile();
-        profile1.setUsername("Tom");
-        profile1.setPassword("helloimTom");
-        profile1.setConfirmPassword("helloimTom");
+
         profile1.setFirstName("Tom");
         profile1.setLastName("Holland");
         profile1.setEmail("tommieboy@gmail.com");

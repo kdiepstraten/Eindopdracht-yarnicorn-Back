@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class ProductDto {
-
+    private Long id;
     @NotEmpty(message = "Name cannot be empty")
     private String name;
     @NotEmpty(message = "Brand cannot be empty")

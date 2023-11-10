@@ -1,5 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Controllers;
 
+import com.example.eindopdrachtyarnicornback.DTO.ProfileAndUserDto;
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.DTO.UserDto;
 
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUserWithProfile(@Valid @RequestBody ProfileDto profileDto) {
+    public ResponseEntity<UserDto> createUserWithProfile(@Valid @RequestBody ProfileAndUserDto profileDto) {
         UserDto result = userService.createUserWithProfile(profileDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }

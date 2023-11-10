@@ -35,6 +35,21 @@ public class ProductService {
         return productDtos;
     }
 
+    public List<ProductDto> getProductsByCategory(String category) {
+
+        List<Product> products = productRepository.findByCategory(category);
+        List<ProductDto> productDtos = new ArrayList<>();
+
+        for (Product p : products) {
+            ProductDto pdto = new ProductDto();
+            productToProductDTO(p, pdto);
+            productDtos.add(pdto);
+        }
+
+        return productDtos;
+    }
+
+
     private static void productToProductDTO(Product p, ProductDto pdto) {
         pdto.setName(p.getName());
         pdto.setBrand(p.getBrand());
@@ -45,6 +60,7 @@ public class ProductService {
         pdto.setGauge(p.getGauge());
         pdto.setDescription(p.getDescription());
         pdto.setCategory(p.getCategory());
+        pdto.setId(p.getId());
     }
     private void productDTOToProduct(ProductDto productDTO, Product product) {
 
@@ -73,11 +89,6 @@ public class ProductService {
     public ProductDto createProduct(ProductDto productDTO) {
         Product product = new Product();
         productDTOToProduct(productDTO, product);
-
-//        Reservation reservation = new Reservation();
-//        reservation.setProduct(product);
-//        reservation.setFullName();
-
 
         Product savedProduct = productRepository.save(product);
 
