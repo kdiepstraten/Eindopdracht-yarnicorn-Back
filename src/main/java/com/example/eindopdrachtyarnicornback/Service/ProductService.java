@@ -36,6 +36,7 @@ public class ProductService {
     }
 
     public List<ProductDto> getProductsByCategory(String category) {
+
         List<Product> products = productRepository.findByCategory(category);
         List<ProductDto> productDtos = new ArrayList<>();
 
@@ -59,6 +60,7 @@ public class ProductService {
         pdto.setGauge(p.getGauge());
         pdto.setDescription(p.getDescription());
         pdto.setCategory(p.getCategory());
+        pdto.setId(p.getId());
     }
     private void productDTOToProduct(ProductDto productDTO, Product product) {
 
@@ -87,11 +89,6 @@ public class ProductService {
     public ProductDto createProduct(ProductDto productDTO) {
         Product product = new Product();
         productDTOToProduct(productDTO, product);
-
-//        Reservation reservation = new Reservation();
-//        reservation.setProduct(product);
-//        reservation.setFullName();
-
 
         Product savedProduct = productRepository.save(product);
 

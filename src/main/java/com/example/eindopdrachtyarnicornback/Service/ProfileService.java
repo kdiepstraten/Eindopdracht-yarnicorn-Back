@@ -49,6 +49,7 @@ public class ProfileService {
         pDto.setFirstName(p.getFirstName());
         pDto.setLastName(p.getLastName());
         pDto.setEmail(p.getEmail());
+        pDto.setId(p.getId());
     }
 
     private void profileDtoToProfile(ProfileDto pDto, Profile p) {

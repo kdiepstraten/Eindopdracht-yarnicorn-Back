@@ -79,22 +79,22 @@ public class UserService {
             }
         }
 
-        // Aanmaken User
+
         userDtoToUser(user, userDto);
         user.setRoles(userRoles);
     }
-        // Aanmaken Profile
+
         Profile profile = new Profile();
         profileDtoToProfile(profileDto, profile);
 
-        // OneToOne relatie tussen User en Profile
-        profile.setUser(user);
 
-        // Beide opslaan in Repository
+        profile.setUser(user);
+        user.setProfile(profile);
+
         userRepository.save(user);
         profileRepository.save(profile);
 
-        // User -> UserDTO om terug te geven naar de controller
+
         UserDto savedUserDto = new UserDto();
         userToUserDto(user, savedUserDto);
 

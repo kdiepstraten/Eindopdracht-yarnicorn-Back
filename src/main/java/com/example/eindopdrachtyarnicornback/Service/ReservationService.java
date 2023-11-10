@@ -51,7 +51,8 @@ public class ReservationService {
         rdto.setCity(reservation.getCity());
         rdto.setAmount(reservation.getAmount());
         rdto.setComment(reservation.getComment());
-
+        rdto.setProductId(reservation.getProduct().getId());
+        rdto.setId(reservation.getId());
     }
 
     private void reservationDtoToReservation(ReservationDto rdto, Reservation reservation) {
@@ -63,6 +64,7 @@ public class ReservationService {
         reservation.setCity(rdto.getCity());
         reservation.setAmount(rdto.getAmount());
         reservation.setComment(rdto.getComment());
+        reservation.setId(rdto.getId());
     }
 
     public List<ReservationDto> getAllReservations() {
