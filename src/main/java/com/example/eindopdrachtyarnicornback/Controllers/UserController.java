@@ -30,8 +30,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUserWithProfile(@Valid @RequestBody ProfileAndUserDto profileDto) {
-        UserDto result = userService.createUserWithProfile(profileDto);
+    public ResponseEntity<UserDto> createUserWithProfile(@Valid @RequestBody ProfileAndUserDto userDto) {
+        UserDto result = userService.createUserWithProfile(userDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 }

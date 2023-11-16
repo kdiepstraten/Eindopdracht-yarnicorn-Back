@@ -62,30 +62,30 @@ public class UserService {
     }
 
 
-    public UserDto createUserWithProfile(ProfileAndUserDto profileDto) {
+    public UserDto createUserWithProfile(ProfileAndUserDto userDto) {
 
-        // User gedeelte van de ProfileDTO
-        UserDto userDto = new UserDto();
-        userDto.setUsername(profileDto.getUsername());
-        userDto.setPassword(passwordEncoder.encode(profileDto.getPassword()));
+
+        UserDto userDto1 = new UserDto();
+        userDto1.setUsername(userDto.getUsername());
+        userDto1.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userDto1.setRoles(userDto.getRoles());
 
         User user = new User();
-    if (profileDto.getRoles() != null) {
+        userDtoToUser(user, userDto1);
+
+    if (userDto1.getRoles() != null) {
         List<Role> userRoles = new ArrayList<>();
-        for (String rolename : profileDto.getRoles()) {
+        for (String rolename : userDto1.getRoles()) {
             Optional<Role> or = roleRepository.findById("ROLE_" + rolename);
             if (or.isPresent()) {
                 userRoles.add(or.get());
             }
         }
-
-
-        userDtoToUser(user, userDto);
         user.setRoles(userRoles);
     }
 
         Profile profile = new Profile();
-        profileDtoToProfile(profileDto, profile);
+        profileDtoToProfile(userDto, profile);
 
 
         profile.setUser(user);
@@ -103,9 +103,6 @@ public class UserService {
 
 
     private void profileDtoToProfile(ProfileAndUserDto pDto, Profile p) {
-//        p.setUsername(pDto.getUsername());
-//        p.setPassword(pDto.getPassword());
-//        p.setConfirmPassword(pDto.getConfirmPassword());
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());
         p.setEmail(pDto.getEmail());

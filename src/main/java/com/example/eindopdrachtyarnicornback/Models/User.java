@@ -15,6 +15,7 @@ public class User {
     private String username;
     private String password;
 
+
     //    Relation with Role ManyToMany.
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();

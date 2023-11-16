@@ -1,12 +1,13 @@
 insert into roles(role_name) values ('ROLE_USER'), ('ROLE_ADMIN');
 
--- INSERT INTO users (username, password)
--- VALUES ('MightyCarlos', 'Taylor');
-
-
 INSERT INTO profile ( id, email, first_name, last_name)
 VALUES ( 69, 'cgarcia@gmail.com', 'Carlos', 'Garcia');
 
+INSERT INTO users (username, password) VALUES ('Jason', '$2a$12$QmyJ39JiFxmpOFrNqyvXw.q0aVHX6163W2zSMslupMvM0nu/ZSy4u');
+INSERT INTO users_roles (users_username, roles_role_name) VALUES ('Jason', 'ROLE_ADMIN');
+
+INSERT INTO users (username, password) VALUES ('Jackson', '$2a$12$QmyJ39JiFxmpOFrNqyvXw.q0aVHX6163W2zSMslupMvM0nu/ZSy4u');
+INSERT INTO users_roles (users_username, roles_role_name) VALUES ('Jackson', 'ROLE_USER');
 
 INSERT INTO products (id, name, brand, color, blend, needle_size, length, description, gauge, category )
 VALUES (50, 'Artemis', 'Greek', 'Forrest Green', '50% cotton en 50% alpaca', 4, 50, 'Wol perfect voor een sjaal', '10x10 = 23stx30rows', 'Alpaca');
@@ -32,8 +33,8 @@ VALUES (36, 'Robert Downey Jr', 'Matthijs his site was better but still oke. 7/1
 INSERT INTO review ( id, full_name, review)
 VALUES (37, 'Emma Stone', 'This is so cute!! 9/10');
 
--- INSERT INTO reservation (id, full_name, email, street, street_number, zipcode, city, amount, comment)
--- VALUES (45, 'Taylor Zakhar Perez', 'tperez@gmail.com', 'Broadway blv', 10011, 10021, 'New York', 10, 'I cant wait to make a sweater')
+INSERT INTO reservation (id, full_name, email, street, street_number, zipcode, city, amount, comment, product_id)
+VALUES (1, 'Ricky Martin', 'rmartin@gmail.com', 'Main Street', 123, '45511', 'Barcelona', 20, 'Ai dios Mio, Muy bueno', 56);
 
 
 
