@@ -1,6 +1,4 @@
 package com.example.eindopdrachtyarnicornback.DTO;
-
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 

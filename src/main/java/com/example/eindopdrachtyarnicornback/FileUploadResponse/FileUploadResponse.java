@@ -1,5 +1,4 @@
 package com.example.eindopdrachtyarnicornback.FileUploadResponse;
-
 import lombok.Data;
 
 @Data

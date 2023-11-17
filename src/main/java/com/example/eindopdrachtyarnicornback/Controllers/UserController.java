@@ -1,11 +1,7 @@
 package com.example.eindopdrachtyarnicornback.Controllers;
-
 import com.example.eindopdrachtyarnicornback.DTO.ProfileAndUserDto;
-import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.DTO.UserDto;
-
 import java.util.List;
-
 import com.example.eindopdrachtyarnicornback.Service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

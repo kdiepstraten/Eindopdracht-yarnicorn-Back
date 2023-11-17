@@ -3,7 +3,6 @@ package com.example.eindopdrachtyarnicornback.Service;
 import com.example.eindopdrachtyarnicornback.DTO.ProductDto;
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Product;
-import com.example.eindopdrachtyarnicornback.Models.Review;
 import com.example.eindopdrachtyarnicornback.Repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,13 +10,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.access.method.P;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
 
@@ -25,6 +23,7 @@ class ProductServiceTest {
     ProductRepository productRepository;
     @InjectMocks
     ProductService productService;
+
     @Test
     void getAllProducts() {
         Product product1 = new Product();
@@ -88,17 +87,19 @@ class ProductServiceTest {
         assertEquals("Beautiful wool where Apollo can be proud off", productDto.getDescription());
         assertEquals("cashmere", productDto.getCategory());
     }
+
     @Test
     void testGetProductNotFound() {
-        // Arrange
-        Long productId = 5L; // Replace with an ID that does not exist
 
-        // Configure the mock to return an empty optional when findById is called
+        Long productId = 5L;
+
+
         Mockito.when(productRepository.findById(productId)).thenReturn(Optional.empty());
 
-        // Act and Assert
+
         assertThrows(IdNotFoundException.class, () -> productService.getProduct(productId));
     }
+
     @Test
     void createProduct() {
         ProductDto newProductDTO = new ProductDto();
@@ -141,22 +142,19 @@ class ProductServiceTest {
     @Test
     void deleteProduct() {
 
-        // Arrange
-        Long productId = 1L; // Replace with a valid product ID
+
+        Long productId = 1L;
         Mockito.doNothing().when(productRepository).deleteById(productId);
 
-        // Act
         String result = productService.deleteProduct(productId);
 
-        // Assert
         assertEquals("Product deleted", result);
         Mockito.verify(productRepository, Mockito.times(1)).deleteById(productId);
     }
 
     @Test
-    void getProductsByCategory(){
+    void getProductsByCategory() {
 
-        // Arrange
         Product product1 = new Product();
         product1.setName("Hades");
         product1.setBrand("Greek");
@@ -185,13 +183,10 @@ class ProductServiceTest {
 
         Mockito.when(productRepository.findByCategory("Alpaca")).thenReturn(products);
 
-        // Act
         List<ProductDto> pdto = productService.getProductsByCategory("Alpaca");
 
-        // Assert
         assertEquals(2, pdto.size());
 
-        // Assert for the first product
         ProductDto pdto1 = pdto.get(0);
         assertEquals("Hades", pdto1.getName());
         assertEquals("Greek", pdto1.getBrand());
@@ -203,7 +198,6 @@ class ProductServiceTest {
         assertEquals("Beautiful wool where Hades can be proud of", pdto1.getDescription());
         assertEquals("Alpaca", pdto1.getCategory());
 
-        // Assert for the second product
         ProductDto pdto2 = pdto.get(1);
         assertEquals("Aphrodite", pdto2.getName());
         assertEquals("Greek", pdto2.getBrand());
@@ -215,7 +209,5 @@ class ProductServiceTest {
         assertEquals("Beautiful wool where Aphrodite can be proud of", pdto2.getDescription());
         assertEquals("Wool", pdto2.getCategory());
     }
-
-
-    }
+}
 

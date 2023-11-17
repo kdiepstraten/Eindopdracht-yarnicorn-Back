@@ -1,7 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
 import com.example.eindopdrachtyarnicornback.DTO.ProfileAndUserDto;
-import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.DTO.UserDto;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
 import com.example.eindopdrachtyarnicornback.Models.Role;
@@ -20,7 +19,6 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final PasswordEncoder passwordEncoder;
-
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final ProfileRepository profileRepository;
@@ -63,7 +61,6 @@ public class UserService {
 
 
     public UserDto createUserWithProfile(ProfileAndUserDto userDto) {
-
 
         UserDto userDto1 = new UserDto();
         userDto1.setUsername(userDto.getUsername());

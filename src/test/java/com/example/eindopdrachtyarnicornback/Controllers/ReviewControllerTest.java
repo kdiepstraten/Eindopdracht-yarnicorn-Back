@@ -1,7 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Controllers;
 
 import com.example.eindopdrachtyarnicornback.DTO.ReviewDto;
-import com.example.eindopdrachtyarnicornback.Models.Product;
 import com.example.eindopdrachtyarnicornback.Models.Review;
 import com.example.eindopdrachtyarnicornback.Repository.ReviewRepository;
 import com.example.eindopdrachtyarnicornback.Security.JwtService;

@@ -24,7 +24,6 @@ class ReviewServiceTest {
     @Test
     void getAllReviews() {
 
-        //Arrange
         Review review = new Review();
         Review review2 = new Review();
 
@@ -38,18 +37,14 @@ class ReviewServiceTest {
 
         Mockito.when(reviewRepository.findAll()).thenReturn(reviews);
 
-        //Act
         List<ReviewDto> result = reviewService.getAllReviews();
 
-
-        //Assert
         assertEquals(2, result.size());
     }
 
     @Test
     void createReview() {
-        
-        //Arrange
+
         ReviewDto newReviewDto = new ReviewDto();
         newReviewDto.setFullName("Alex Clearmont Diaz");
         newReviewDto.setReview("10/10");
@@ -61,11 +56,7 @@ class ReviewServiceTest {
 
         Mockito.when(reviewRepository.save(Mockito.any(Review.class))).thenReturn(newReview);
 
-        //Act
-
         ReviewDto nrDTO = reviewService.createReview(newReviewDto);
-
-        //Assert
 
         assertEquals("Alex Clearmont Diaz", nrDTO.getFullName());
         assertEquals("10/10", nrDTO.getReview());

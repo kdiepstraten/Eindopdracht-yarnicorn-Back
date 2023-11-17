@@ -1,6 +1,5 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
-import com.example.eindopdrachtyarnicornback.DTO.ProductDto;
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
 import com.example.eindopdrachtyarnicornback.Repository.ProfileRepository;
@@ -54,13 +53,11 @@ class ProfileServiceTest {
 
     @Test
     void deleteProfile() {
-        Long productId = 1L; // Replace with a valid product ID
+        Long productId = 1L;
         Mockito.doNothing().when(profileRepository).deleteById(productId);
 
-        // Act
         String result = profileService.deleteProfile(productId);
 
-        // Assert
         assertEquals("Profile deleted", result);
         Mockito.verify(profileRepository, Mockito.times(1)).deleteById(productId);
 

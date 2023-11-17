@@ -1,9 +1,6 @@
 package com.example.eindopdrachtyarnicornback.DTO;
-
 import jakarta.validation.constraints.*;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class ProductDto {

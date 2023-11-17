@@ -1,7 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
 import com.example.eindopdrachtyarnicornback.DTO.ReservationDto;
-import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Exceptions.InvalidAmountException;
 import com.example.eindopdrachtyarnicornback.Exceptions.ProductIdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Product;

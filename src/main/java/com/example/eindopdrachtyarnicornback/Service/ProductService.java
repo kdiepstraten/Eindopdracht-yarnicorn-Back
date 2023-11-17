@@ -1,11 +1,9 @@
 package com.example.eindopdrachtyarnicornback.Service;
-import org.springframework.dao.EmptyResultDataAccessException;
+
 import com.example.eindopdrachtyarnicornback.DTO.ProductDto;
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Product;
-import com.example.eindopdrachtyarnicornback.Models.Reservation;
 import com.example.eindopdrachtyarnicornback.Repository.ProductRepository;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,11 +16,11 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository){
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    public List<ProductDto> getAllProducts(){
+    public List<ProductDto> getAllProducts() {
 
         List<Product> products = productRepository.findAll();
         List<ProductDto> productDtos = new ArrayList<>();
@@ -63,6 +61,7 @@ public class ProductService {
         pdto.setCategory(p.getCategory());
         pdto.setId(p.getId());
     }
+
     private void productDTOToProduct(ProductDto productDTO, Product product) {
 
         product.setName(productDTO.getName());
@@ -75,9 +74,10 @@ public class ProductService {
         product.setDescription(productDTO.getDescription());
         product.setCategory(productDTO.getCategory());
     }
+
     public ProductDto getProduct(Long id) {
         Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()){
+        if (product.isPresent()) {
             Product p = product.get();
             ProductDto pdto = new ProductDto();
             productToProductDTO(p, pdto);
@@ -99,13 +99,13 @@ public class ProductService {
         return savedProductDto;
     }
 
-    public String deleteProduct(@RequestBody Long id){
-  if (productRepository.existsById(id)){
-      productRepository.deleteById(id);
-      return "Product deleted";
-  } else {
-      throw new IdNotFoundException("Product not found with id: " + id);
-  }
+    public String deleteProduct(@RequestBody Long id) {
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+        } else {
+            throw new IdNotFoundException("Product not found with id: " + id);
+        }
+        return "Product deleted";
     }
 
 }

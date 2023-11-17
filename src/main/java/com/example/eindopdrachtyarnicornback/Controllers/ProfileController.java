@@ -1,7 +1,7 @@
 package com.example.eindopdrachtyarnicornback.Controllers;
-
 import com.example.eindopdrachtyarnicornback.DTO.ProfileAndUserDto;
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
+import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Service.ProfileService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -39,8 +39,11 @@ public class ProfileController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ProfileDto> deleteProfile(@PathVariable Long id) {
-        profileService.deleteProfile(id);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        try {
+            profileService.deleteProfile(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (IdNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

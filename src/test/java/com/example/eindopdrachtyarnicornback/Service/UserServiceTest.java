@@ -1,8 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
-import com.example.eindopdrachtyarnicornback.DTO.ProductDto;
 import com.example.eindopdrachtyarnicornback.DTO.UserDto;
-import com.example.eindopdrachtyarnicornback.Models.Product;
 import com.example.eindopdrachtyarnicornback.Models.User;
 import com.example.eindopdrachtyarnicornback.Repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -27,8 +25,6 @@ class UserServiceTest {
     @InjectMocks
     UserService userService;
 
-    @Mock
-    PasswordEncoder passwordEncoder;
     @Test
     void getAllUsers() {
         User user1 = new User();
@@ -49,24 +45,4 @@ class UserServiceTest {
 
         assertEquals(2, udto.size());
     }
-
-//    @Test
-//    void createUser() {
-//
-//        UserDto userDto = new UserDto();
-//        userDto.setUsername("Jake");
-//        userDto.setPassword("hellofromthemountain");
-//
-//        User user = new User();
-//        user.setUsername(userDto.getUsername());
-//        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-//
-//        Mockito.when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
-//
-//        UserDto userDTO = userService.createUserWithProfile(userDto);
-//
-//        assertEquals("Jake", userDTO.getUsername());
-//        assertEquals("hellofromthemountain", userDTO.getPassword());
-//
-//    }
 }

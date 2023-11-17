@@ -1,5 +1,4 @@
 package com.example.eindopdrachtyarnicornback.DTO;
-
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -10,7 +9,6 @@ public class UserDto {
     private String username;
     @NotEmpty (message = "Password cannot be empty")
     private String password;
-
     private String[] roles;
 
 }
