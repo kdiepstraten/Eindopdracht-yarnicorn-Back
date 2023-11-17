@@ -1,6 +1,8 @@
 package com.example.eindopdrachtyarnicornback.Controllers;
 
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
+import com.example.eindopdrachtyarnicornback.Exceptions.InvalidAmountException;
+import com.example.eindopdrachtyarnicornback.Exceptions.ProductIdNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,5 +16,12 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-
+    @ExceptionHandler(value = ProductIdNotFoundException.class)
+    public ResponseEntity<Object> exceptionProductId(ProductIdNotFoundException exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(value = InvalidAmountException.class)
+    public ResponseEntity<Object> exceptionInvalidAmount(InvalidAmountException exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

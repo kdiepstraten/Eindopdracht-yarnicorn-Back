@@ -1,10 +1,11 @@
 package com.example.eindopdrachtyarnicornback.Service;
-
+import org.springframework.dao.EmptyResultDataAccessException;
 import com.example.eindopdrachtyarnicornback.DTO.ProductDto;
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Product;
 import com.example.eindopdrachtyarnicornback.Models.Reservation;
 import com.example.eindopdrachtyarnicornback.Repository.ProductRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -99,9 +100,12 @@ public class ProductService {
     }
 
     public String deleteProduct(@RequestBody Long id){
-
-        productRepository.deleteById(id);
-        return "Product deleted";
+  if (productRepository.existsById(id)){
+      productRepository.deleteById(id);
+      return "Product deleted";
+  } else {
+      throw new IdNotFoundException("Product not found with id: " + id);
+  }
     }
 
 }

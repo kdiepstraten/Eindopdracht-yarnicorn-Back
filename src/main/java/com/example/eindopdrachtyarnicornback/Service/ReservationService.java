@@ -2,6 +2,8 @@ package com.example.eindopdrachtyarnicornback.Service;
 
 import com.example.eindopdrachtyarnicornback.DTO.ReservationDto;
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
+import com.example.eindopdrachtyarnicornback.Exceptions.InvalidAmountException;
+import com.example.eindopdrachtyarnicornback.Exceptions.ProductIdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Product;
 import com.example.eindopdrachtyarnicornback.Models.Reservation;
 import com.example.eindopdrachtyarnicornback.Repository.ProductRepository;
@@ -23,15 +25,20 @@ public class ReservationService {
 
 
     public ReservationDto createReservation(ReservationDto reservationDto, Long productId) {
+
+        if (reservationDto.getAmount() < 0) {
+            throw new InvalidAmountException("Invalid reservation amount: " + reservationDto.getAmount());
+        }
+
         Reservation reservation = new Reservation();
         reservationDtoToReservation(reservationDto, reservation);
 
-        // Retrieve the associated product
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new IdNotFoundException("Product not found with id: " + productId));
 
-        reservation.setProduct(product); // Associate the reservation with the product
-        reservationDto.setProductId(product.getId()); // Adds the ProductId to the DTO
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductIdNotFoundException("Product not found with id: " + productId));
+
+        reservation.setProduct(product);
+        reservationDto.setProductId(product.getId());
 
 
         Reservation savedReservation = reservationRepository.save(reservation);
@@ -40,6 +47,7 @@ public class ReservationService {
         reservationToReservationDto(savedReservation, savedReservationDto);
         savedReservationDto.setProductId(product.getId());
         return savedReservationDto;
+
     }
 
     private void reservationToReservationDto(Reservation reservation, ReservationDto rdto) {
