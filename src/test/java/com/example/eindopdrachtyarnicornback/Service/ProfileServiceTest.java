@@ -1,6 +1,7 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
 import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
+import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
 import com.example.eindopdrachtyarnicornback.Repository.ProfileRepository;
 import org.junit.jupiter.api.Test;
@@ -47,19 +48,40 @@ class ProfileServiceTest {
         assertEquals(2, pdto.size());
     }
 
-    @Test
-    void createProfile() {
-    }
+//    @Test
+//    void deleteProfile() {
+//        Long productId = 1L;
+//        Mockito.doNothing().when(profileRepository).deleteById(productId);
+//
+//        String result = profileService.deleteProfile(productId);
+//
+//        assertEquals("Profile deleted", result);
+//        Mockito.verify(profileRepository, Mockito.times(1)).deleteById(productId);
+//
+//    }
 
     @Test
-    void deleteProfile() {
+    void deleteProfileWhenProfileExists() {
+
+
         Long productId = 1L;
+        Mockito.when(profileRepository.existsById(productId)).thenReturn(true);
         Mockito.doNothing().when(profileRepository).deleteById(productId);
 
         String result = profileService.deleteProfile(productId);
 
         assertEquals("Profile deleted", result);
         Mockito.verify(profileRepository, Mockito.times(1)).deleteById(productId);
+    }
+    @Test
+    void deleteProfileWhenProfileDoesNotExists() {
 
+        Long productId = 1L;
+        Mockito.when(profileRepository.existsById(productId)).thenReturn(false);
+
+        assertThrows(IdNotFoundException.class, () -> profileService.deleteProfile(productId));
+
+        Mockito.verify(profileRepository, Mockito.never()).deleteById(productId);
+        Mockito.verify(profileRepository, Mockito.times(1)).existsById(productId);
     }
 }

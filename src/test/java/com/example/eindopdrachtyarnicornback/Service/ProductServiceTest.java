@@ -140,16 +140,28 @@ class ProductServiceTest {
     }
 
     @Test
-    void deleteProduct() {
+    void deleteProductWhenProductExists() {
 
 
         Long productId = 1L;
+        Mockito.when(productRepository.existsById(productId)).thenReturn(true);
         Mockito.doNothing().when(productRepository).deleteById(productId);
 
         String result = productService.deleteProduct(productId);
 
         assertEquals("Product deleted", result);
         Mockito.verify(productRepository, Mockito.times(1)).deleteById(productId);
+    }
+    @Test
+    void deleteProductWhenProductDoesNotExists() {
+
+        Long productId = 1L;
+        Mockito.when(productRepository.existsById(productId)).thenReturn(false);
+
+        assertThrows(IdNotFoundException.class, () -> productService.deleteProduct(productId));
+
+        Mockito.verify(productRepository, Mockito.never()).deleteById(productId);
+        Mockito.verify(productRepository, Mockito.times(1)).existsById(productId);
     }
 
     @Test
