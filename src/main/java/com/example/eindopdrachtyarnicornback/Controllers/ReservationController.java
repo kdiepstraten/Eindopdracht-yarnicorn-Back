@@ -1,5 +1,7 @@
 package com.example.eindopdrachtyarnicornback.Controllers;
+import com.example.eindopdrachtyarnicornback.DTO.ProfileDto;
 import com.example.eindopdrachtyarnicornback.DTO.ReservationDto;
+import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Service.ReservationService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -26,5 +28,15 @@ public class ReservationController {
     public ResponseEntity<List<ReservationDto>> getAllReservations() {
         List<ReservationDto> rDto = reservationService.getAllReservations();
         return new ResponseEntity<>(rDto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProfileDto> deleteReservation(@PathVariable Long id) {
+        try {
+            reservationService.deleteReservation(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (IdNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

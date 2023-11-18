@@ -10,17 +10,17 @@ INSERT INTO users (username, password) VALUES ('Jackson', '$2a$12$QmyJ39JiFxmpOF
 INSERT INTO users_roles (users_username, roles_role_name) VALUES ('Jackson', 'ROLE_USER');
 
 INSERT INTO products (id, name, brand, color, blend, needle_size, length, description, gauge, category )
-VALUES (50, 'Artemis', 'Greek', 'Forrest Green', '50% cotton en 50% alpaca', 4, 50, 'Wol perfect voor een sjaal', '10x10 = 23stx30rows', 'Alpaca');
+VALUES (50, 'Artemis', 'Greek', 'Forrest Green', '50% cotton en 50% alpaca', 4, 50, 'Greek Artemis is spun from Peruvian sheep wool. The yarn is characterised by its lovely colours which are a mixture of different shades dyed into the wool before it is spun.  ', '10x10 = 21stx28rows', 'Alpaca');
 INSERT INTO products (id, name, brand, color, blend, needle_size, length, description, gauge, category )
-VALUES (52, 'Hades', 'Greek', 'Steeple', '50% cotton en 50% cashmere', 6, 50, 'Wol perfect voor een trui', '10x10 = 23stx30rows', 'Cotton');
+VALUES (52, 'Hades', 'Greek', 'Steeple', '50% cotton en 50% cashmere', 6, 50, 'Greek Hades is a chunky single ply yarn with a rugged structure. It is well suited for thick outdoor sweaters and also works really well used for soft furnishings such as plaids and pillows.','10x10 = 24stx28rows', 'Cotton');
 INSERT INTO products (id, name, brand, color, blend, needle_size, length, description, gauge, category )
-VALUES (53, 'Demeter', 'Greek', 'Mustard', '100% hennep', 5, 25, 'Wol perfect voor een trui', '10x10 = 23stx30rows', 'Plant');
+VALUES (53, 'Demeter', 'Greek', 'Mustard', '100% hennep', 2, 25, 'Greek Demeter is an ultra thin, two ply yarn made from 100% Alpaca. We use this yarn both individually, especially for scarves, but mainly we knit this yarn together with a strand of one of our other yarns', '10x10 = 23stx30rows', 'Plant');
 INSERT INTO products (id, name, brand, color, blend, needle_size, length, description, gauge, category )
-VALUES (54, 'Hestia', 'Greek', 'Flaming Orange', '50% cotton en 50% yak', 4, 25, 'Wol perfect voor een trui', '10x10 = 23stx30rows', 'Yak');
+VALUES (54, 'Hestia', 'Greek', 'Flaming Orange', '50% cotton en 50% yak', 4, 25, 'Greek Hestia is a chunky single ply yarn with a rugged structure. It is well suited for thick outdoor sweaters and also works really well used for soft furnishings such as plaids and pillow, not least when worked together with Silk Mohair.', '10x10 = 23stx30rows', 'Yak');
 INSERT INTO products (id, name, brand, color, blend, needle_size, length, description, gauge, category )
-VALUES (55, 'Poseidon', 'Greek', 'Submerged', '100% wool', 4, 25, 'Wol perfect voor een sok', '10x10 = 23stx30rows', 'Sheep');
+VALUES (55, 'Poseidon', 'Greek', 'Submerged', '100% wool', 4, 25, 'Greek Poseidon is spun from Peruvian sheep wool. The yarn is characterised by its lovely colours which are a mixture of different shades dyed into the wool before it is spun.' , '10x10 = 20stx30rows', 'Sheep');
 INSERT INTO products (id, name, brand, color, blend, needle_size, length, description, gauge, category )
-VALUES (56, 'Hera', 'Greek', 'Lilac', '10% possum, 20% cotton, 70% wool', 4, 50, 'Wol perfect voor een handschoen', '10x10 = 23stx30rows', 'Exotic');
+VALUES (56, 'Hera', 'Greek', 'Lilac', '10% possum, 20% cotton, 70% wool', 3, 50, 'Greek Hera is an ultra thin, two ply yarn made from 100% Alpaca. We use this yarn both individually, especially for scarves, but mainly we knit this yarn together with a strand of one of our other yarns', '10x10 = 28stx35rows', 'Exotic');
 
 INSERT INTO review ( id, full_name, review)
 VALUES (33, 'Taylor Zakhar Perez', 'What an amazing site is this! 11/10');

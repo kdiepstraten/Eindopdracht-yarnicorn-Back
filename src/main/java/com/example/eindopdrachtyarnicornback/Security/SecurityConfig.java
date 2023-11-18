@@ -56,9 +56,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/auth").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                         .requestMatchers(HttpMethod.GET, "/reservation").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/reservation").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.DELETE, "/reservation/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/product").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.GET, "/product/{id}").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")
@@ -69,7 +70,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/profile/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").hasAnyRole("ADMIN", "USER")
-                        .anyRequest().denyAll()
+                        .anyRequest().permitAll()
+
 
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
