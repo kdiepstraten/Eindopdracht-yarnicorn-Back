@@ -1,6 +1,8 @@
 package com.example.eindopdrachtyarnicornback.Models;
+
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.util.List;
 
 @Data
@@ -21,9 +23,15 @@ public class Product {
     private String category;
 
 
-    //    Relation with Reservation OneToOne. Product is the primary
-    @OneToMany(mappedBy = "product")
+    @OneToMany(
+            mappedBy = "product",
+            fetch = FetchType.EAGER)
     private List<Reservation> reservations;
 
+
+    // One-to-One relationship with FileDocument
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "file_document_id")
+    private FileDocument fileDocument;
 
 }

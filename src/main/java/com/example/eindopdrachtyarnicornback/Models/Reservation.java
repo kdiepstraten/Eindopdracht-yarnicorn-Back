@@ -17,7 +17,7 @@ public class Reservation {
     private Integer amount;
     private String comment;
 
-    //    Relation with Products OneToOne.
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

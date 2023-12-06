@@ -221,5 +221,63 @@ class ProductServiceTest {
         assertEquals("Beautiful wool where Aphrodite can be proud of", pdto2.getDescription());
         assertEquals("Wool", pdto2.getCategory());
     }
+
+    @Test
+    void updateProduct() {
+        Long productId = 1L;
+        ProductDto productDTO = new ProductDto();
+        productDTO.setName("Apollo");
+        productDTO.setBrand("Greek");
+        productDTO.setColor("Onyx");
+        productDTO.setBlend("50 alpaca 50 wool");
+        productDTO.setNeedleSize(4);
+        productDTO.setLength(50);
+        productDTO.setGauge("10x10=23stx22rows");
+        productDTO.setDescription("Beautiful wool where Hades can be proud off");
+        productDTO.setCategory("Alpaca");
+        productDTO.setFileUrl("http://localhost:8080/downloadFromDB/Hera.jpg");
+
+        Product product = new Product();
+        product.setName(productDTO.getName());
+        product.setBrand(productDTO.getBrand());
+        product.setColor(productDTO.getColor());
+        product.setBlend(productDTO.getBlend());
+        product.setNeedleSize(productDTO.getNeedleSize());
+        product.setLength(productDTO.getLength());
+        product.setGauge(productDTO.getGauge());
+        product.setDescription(productDTO.getDescription());
+        product.setCategory(productDTO.getCategory());
+
+        ProductDto updatedProductDTO = new ProductDto();
+        updatedProductDTO.setName("Hades");
+        updatedProductDTO.setBrand("Greek");
+        updatedProductDTO.setColor("Onyx");
+        updatedProductDTO.setBlend("50 alpaca 50 wool");
+        updatedProductDTO.setNeedleSize(4);
+        updatedProductDTO.setLength(50);
+        updatedProductDTO.setGauge("10x10=23stx22rows");
+        updatedProductDTO.setDescription("Beautiful wool where Hades can be proud off");
+        updatedProductDTO.setCategory("Alpaca");
+        updatedProductDTO.setFileUrl("http://localhost:8080/downloadFromDB/Hera.jpg");
+
+        Mockito.when(productRepository.findById(productId)).thenReturn(Optional.of(product));
+        Mockito.when(productRepository.save(Mockito.any(Product.class))).thenReturn(product);
+
+
+        ProductDto updatedProduct = productService.updateProduct(productId, updatedProductDTO);
+
+        assertEquals(1, updatedProduct.getId());
+        assertEquals("Hades", updatedProduct.getName());
+        assertEquals("Greek", updatedProduct.getBrand());
+        assertEquals("Onyx", updatedProduct.getColor());
+        assertEquals("50 alpaca 50 wool", updatedProduct.getBlend());
+        assertEquals(4, updatedProduct.getNeedleSize());
+        assertEquals(50, updatedProduct.getLength());
+        assertEquals("10x10=23stx22rows", updatedProduct.getGauge());
+        assertEquals("Beautiful wool where Hades can be proud off", updatedProduct.getDescription());
+        assertEquals("Alpaca", updatedProduct.getCategory());
+        assertEquals("baseURL/http://localhost:8080/downloadFromDB/Hera.jpg", updatedProduct.getFileUrl());
+
+    }
 }
 

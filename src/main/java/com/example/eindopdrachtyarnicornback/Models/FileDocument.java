@@ -1,8 +1,6 @@
 package com.example.eindopdrachtyarnicornback.Models;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -12,9 +10,14 @@ public class FileDocument {
     @Id
     @GeneratedValue
     private Long id;
-
+    @Column(unique = true)
     private String fileName;
-
     @Lob
     private byte[] docFile;
+
+    // One-to-One relationship with Product
+    @OneToOne ()
+    @JoinColumn(name = "product_id")  // Specify the column name in the FileDocument table
+    private Product product;
+
 }

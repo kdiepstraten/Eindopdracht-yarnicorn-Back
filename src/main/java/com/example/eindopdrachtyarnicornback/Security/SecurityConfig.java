@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         .requestMatchers(HttpMethod.GET, "/review").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/review").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/review").authenticated()
                         .requestMatchers(HttpMethod.GET, "/roles").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
@@ -60,16 +60,18 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/reservation").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/reservation").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.DELETE, "/reservation/{id}").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/product").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/product/{id}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/product").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/product/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/product/byCategory").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/product/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/profile").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/profile/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/profile").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.DELETE, "/profile/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/downloadFromDB/{fileName}").permitAll()
                         .anyRequest().permitAll()
 
 

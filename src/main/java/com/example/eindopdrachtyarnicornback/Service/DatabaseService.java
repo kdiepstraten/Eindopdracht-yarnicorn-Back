@@ -1,6 +1,9 @@
 package com.example.eindopdrachtyarnicornback.Service;
+import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.FileDocument;
+import com.example.eindopdrachtyarnicornback.Models.Product;
 import com.example.eindopdrachtyarnicornback.Repository.DocFileRepository;
+import com.example.eindopdrachtyarnicornback.Repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,17 +15,30 @@ import java.util.Objects;
 public class DatabaseService {
    private final DocFileRepository doc;
 
-    public DatabaseService(DocFileRepository doc){
+   private final ProductRepository productRepository;
+
+    public DatabaseService(DocFileRepository doc, ProductRepository productRepository){
         this.doc = doc;
+        this.productRepository = productRepository;
     }
 
-    public FileDocument uploadFileDocument(MultipartFile file) throws IOException {
+    public FileDocument uploadFileDocument(MultipartFile file, Long productId) throws IOException {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IdNotFoundException("Product not found with id: " + productId));
+
         String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         FileDocument fileDocument = new FileDocument();
-        fileDocument.setFileName(name);
+        fileDocument.setFileName(file.getOriginalFilename());
         fileDocument.setDocFile(file.getBytes());
+        fileDocument.setProduct(product);
 
         doc.save(fileDocument);
+
+        // Set the FileDocument in the Product
+        product.setFileDocument(fileDocument);
+
+        // Save the Product to update the relationship
+        productRepository.save(product);
 
         return fileDocument;
 
