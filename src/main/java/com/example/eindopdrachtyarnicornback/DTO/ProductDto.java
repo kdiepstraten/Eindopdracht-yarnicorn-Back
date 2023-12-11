@@ -24,6 +24,11 @@ public class ProductDto {
     private String description;
     @NotEmpty(message = "Catagory cannot be empty")
     private String category;
+    private String fileUrl;
+    private byte[] docFile;
+    // TODO: fix bug with file upload and category.
+
+
 
 
 }

@@ -2,6 +2,8 @@ insert into roles(role_name) values ('ROLE_USER'), ('ROLE_ADMIN');
 
 INSERT INTO profile ( id, email, first_name, last_name)
 VALUES ( 69, 'cgarcia@gmail.com', 'Carlos', 'Garcia');
+INSERT INTO profile ( id, email, first_name, last_name)
+VALUES ( 70, 'bond@gmail.com', 'James', 'Bond');
 
 INSERT INTO users (username, password) VALUES ('Jason', '$2a$12$QmyJ39JiFxmpOFrNqyvXw.q0aVHX6163W2zSMslupMvM0nu/ZSy4u');
 INSERT INTO users_roles (users_username, roles_role_name) VALUES ('Jason', 'ROLE_ADMIN');
@@ -22,6 +24,7 @@ VALUES (55, 'Poseidon', 'Greek', 'Submerged', '100% wool', 4, 25, 'Greek Poseido
 INSERT INTO products (id, name, brand, color, blend, needle_size, length, description, gauge, category )
 VALUES (56, 'Hera', 'Greek', 'Lilac', '10% possum, 20% cotton, 70% wool', 3, 50, 'Greek Hera is an ultra thin, two ply yarn made from 100% Alpaca. We use this yarn both individually, especially for scarves, but mainly we knit this yarn together with a strand of one of our other yarns', '10x10 = 28stx35rows', 'Exotic');
 
+
 INSERT INTO review ( id, full_name, review)
 VALUES (33, 'Taylor Zakhar Perez', 'What an amazing site is this! 11/10');
 INSERT INTO review ( id, full_name, review)
@@ -34,7 +37,7 @@ INSERT INTO review ( id, full_name, review)
 VALUES (37, 'Emma Stone', 'This is so cute!! 9/10');
 
 INSERT INTO reservation (id, full_name, email, street, street_number, zipcode, city, amount, comment, product_id)
-VALUES (1, 'Ricky Martin', 'rmartin@gmail.com', 'Main Street', 123, '45511', 'Barcelona', 20, 'Ai dios Mio, Muy bueno', 56);
+VALUES (50, 'Ricky Martin', 'rmartin@gmail.com', 'Main Street', 123, '45511', 'Barcelona', 20, 'Ai dios Mio, Muy bueno', 56);
 
 
 
