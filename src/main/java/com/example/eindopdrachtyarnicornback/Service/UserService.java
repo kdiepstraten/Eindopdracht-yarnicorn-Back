@@ -2,6 +2,7 @@ package com.example.eindopdrachtyarnicornback.Service;
 
 import com.example.eindopdrachtyarnicornback.DTO.ProfileAndUserDto;
 import com.example.eindopdrachtyarnicornback.DTO.UserDto;
+import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Profile;
 import com.example.eindopdrachtyarnicornback.Models.Role;
 import com.example.eindopdrachtyarnicornback.Models.User;
@@ -103,6 +104,16 @@ public class UserService {
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());
         p.setEmail(pDto.getEmail());
+    }
+
+    public String deleteUser(String username) {
+        if (userRepository.existsById(username)) {
+            userRepository.deleteById(username);
+        } else {
+            throw new IdNotFoundException("User not found with username: " + username);
+        }
+        return "User deleted";
+
     }
 }
 
