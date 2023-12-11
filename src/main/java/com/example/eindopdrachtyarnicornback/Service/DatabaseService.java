@@ -28,16 +28,15 @@ public class DatabaseService {
 
         String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         FileDocument fileDocument = new FileDocument();
-        fileDocument.setFileName(file.getOriginalFilename());
+        fileDocument.setFileName(name);
         fileDocument.setDocFile(file.getBytes());
         fileDocument.setProduct(product);
+//        fileDocument.setId(product.getId());
 
         doc.save(fileDocument);
 
-        // Set the FileDocument in the Product
         product.setFileDocument(fileDocument);
 
-        // Save the Product to update the relationship
         productRepository.save(product);
 
         return fileDocument;

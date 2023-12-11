@@ -48,7 +48,9 @@ public class DataLoader {
                 fileDocument.setDocFile(imageBytes);
                 fileDocument.setProduct(product);
                 fileDocument.setId(product.getId());
+
                 filerepository.save(fileDocument);
+
                 product.setFileDocument(fileDocument);
 
                 productRepository.save(product);

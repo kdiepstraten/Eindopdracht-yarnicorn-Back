@@ -2,6 +2,7 @@ package com.example.eindopdrachtyarnicornback.Service;
 
 import com.example.eindopdrachtyarnicornback.DTO.ProductDto;
 import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
+import com.example.eindopdrachtyarnicornback.Models.FileDocument;
 import com.example.eindopdrachtyarnicornback.Models.Product;
 import com.example.eindopdrachtyarnicornback.Repository.ProductRepository;
 import org.junit.jupiter.api.Test;
@@ -112,6 +113,9 @@ class ProductServiceTest {
         newProductDTO.setGauge("10x10=23stx22rows");
         newProductDTO.setDescription("Beautiful wool where Hades can be proud off");
         newProductDTO.setCategory("Alpaca");
+        newProductDTO.setFileUrl("http://localhost:8080/downloadFromDB/Hera.jpg");
+//        newProductDTO.setId(1L);
+        newProductDTO.setDocFile(newProductDTO.getFileUrl().getBytes());
 
         Product product = new Product();
         product.setName(newProductDTO.getName());
@@ -123,11 +127,22 @@ class ProductServiceTest {
         product.setGauge(newProductDTO.getGauge());
         product.setDescription(newProductDTO.getDescription());
         product.setCategory(newProductDTO.getCategory());
+        product.setId(newProductDTO.getId());
+
+        FileDocument fileDocument = new FileDocument();
+        fileDocument.setFileName(newProductDTO.getFileUrl());
+        fileDocument.setDocFile(newProductDTO.getFileUrl().getBytes());
+        fileDocument.setId(newProductDTO.getId());
+
+        product.setFileDocument(fileDocument);
 
         Mockito.when(productRepository.save(Mockito.any(Product.class))).thenReturn(product);
 
         ProductDto productDto = productService.createProduct(newProductDTO);
 
+//        productDto.setFileUrl("baseURL/" + productDto.getFileUrl());
+
+        assertNotNull(productDto.getId());
         assertEquals("Hades", productDto.getName());
         assertEquals("Greek", productDto.getBrand());
         assertEquals("Onyx", productDto.getColor());
@@ -137,6 +152,8 @@ class ProductServiceTest {
         assertEquals("10x10=23stx22rows", productDto.getGauge());
         assertEquals("Beautiful wool where Hades can be proud off", productDto.getDescription());
         assertEquals("Alpaca", productDto.getCategory());
+        assertEquals("baseURL/http://localhost:8080/downloadFromDB/Hera.jpg", productDto.getFileUrl());
+//        assertEquals(1L, productDto.getId());
     }
 
     @Test

@@ -6,6 +6,7 @@ import com.example.eindopdrachtyarnicornback.Models.FileDocument;
 import com.example.eindopdrachtyarnicornback.Models.Product;
 import com.example.eindopdrachtyarnicornback.Repository.DocFileRepository;
 import com.example.eindopdrachtyarnicornback.Repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -38,7 +39,7 @@ public class ProductService {
         }
         return productDtos;
     }
-
+    @Transactional
     public List<ProductDto> getProductsByCategory(String category) {
 
         List<Product> products = productRepository.findByCategory(category);
@@ -65,8 +66,11 @@ public class ProductService {
         pdto.setDescription(p.getDescription());
         pdto.setCategory(p.getCategory());
         pdto.setId(p.getId());
-        pdto.setDocFile(p.getFileDocument().getDocFile());
-        pdto.setFileUrl(p.getFileDocument().getFileName());
+        if (p.getFileDocument() != null) {
+            pdto.setDocFile(p.getFileDocument().getDocFile());
+            pdto.setFileUrl(p.getFileDocument().getFileName());
+        }
+
     }
 
     private void productDTOToProduct(ProductDto productDTO, Product product) {
@@ -81,14 +85,14 @@ public class ProductService {
         product.setDescription(productDTO.getDescription());
         product.setCategory(productDTO.getCategory());
 
-        // Create and set FileDocument
-        FileDocument fileDocument = new FileDocument();
-        fileDocument.setFileName(productDTO.getFileUrl());
-        fileDocument.setDocFile(productDTO.getFileUrl().getBytes());
-        fileDocument.setId(productDTO.getId());
-
-
-        product.setFileDocument(fileDocument);
+//        // Create and set FileDocument
+//        FileDocument fileDocument = new FileDocument();
+//        fileDocument.setFileName(productDTO.getFileUrl());
+////        fileDocument.setDocFile(productDTO.getFileUrl().getBytes());
+//        fileDocument.setId(productDTO.getId());
+//
+//
+//        product.setFileDocument(fileDocument);
     }
 
     public ProductDto getProduct(Long id) {
@@ -114,6 +118,7 @@ public class ProductService {
     private String getFileUrlFromDocument(FileDocument fileDocument) {
         // Implement logic to get the file URL from FileDocument
         // For example, you can concatenate the base URL with the file name
+        if (fileDocument == null) return null;
         return "baseURL/" + fileDocument.getFileName();
     }
 

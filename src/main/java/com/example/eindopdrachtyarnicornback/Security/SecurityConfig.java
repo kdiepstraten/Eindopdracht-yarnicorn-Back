@@ -75,6 +75,7 @@ public class SecurityConfig {
                         .anyRequest().permitAll()
 
 
+
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrf -> csrf.disable())
