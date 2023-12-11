@@ -53,6 +53,18 @@ public class ReviewService {
 
         return savedReviewDto;
     }
+    public ReviewDto updateReview(Long id, ReviewDto reviewDto) {
+        if (reviewRepository.existsById(id)) {
+            Review review = reviewRepository.findById(id).get();
+            reviewDtoToReview(reviewDto, review);
+            Review savedReview = reviewRepository.save(review);
+            ReviewDto savedReviewDto = new ReviewDto();
+            reviewToReviewDto(savedReview, savedReviewDto);
+            return savedReviewDto;
+        } else {
+            throw new IdNotFoundException("Review with id " + id + " not found");
+        }
+    }
     public String deleteReview(Long id) {
         if (reviewRepository.existsById(id)) {
             reviewRepository.deleteById(id);

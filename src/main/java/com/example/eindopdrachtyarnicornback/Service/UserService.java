@@ -110,7 +110,23 @@ public class UserService {
             throw new IdNotFoundException("User not found with username: " + username);
         }
     }
+    public UserDto updateUser(String username, UserDto userDto) {
+        if (userRepository.existsById(username)) {
+            UserDto uDto = new UserDto();
+            uDto.setUsername(username);
+            uDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            uDto.setRoles(userDto.getRoles());
 
+            User user = userRepository.findById(username).get();
+            userDtoToUser(user, uDto);
+            User savedUser = userRepository.save(user);
+            UserDto savedUserDto = new UserDto();
+            userToUserDto(savedUser, savedUserDto);
+            return savedUserDto;
+        } else {
+            throw new IdNotFoundException("User not found with username: " + username);
+        }
+    }
     private void profileDtoToProfile(ProfileAndUserDto pDto, Profile p) {
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());

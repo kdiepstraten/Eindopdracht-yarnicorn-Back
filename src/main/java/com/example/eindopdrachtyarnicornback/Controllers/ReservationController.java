@@ -23,7 +23,15 @@ public class ReservationController {
         ReservationDto rdto = reservationService.createReservation(reservationDto, reservationDto.getProductId());
         return new ResponseEntity<>(rdto, HttpStatus.CREATED);
     }
-
+    @PutMapping("/{id}")
+    public ResponseEntity<ReservationDto> updateReservation(@PathVariable Long id, @Valid @RequestBody ReservationDto reservationDto) {
+        try {
+            ReservationDto rdto = reservationService.updateReservation(id, reservationDto);
+            return new ResponseEntity<>(rdto, HttpStatus.OK);
+        } catch (IdNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     @GetMapping
     public ResponseEntity<List<ReservationDto>> getAllReservations() {
         List<ReservationDto> rDto = reservationService.getAllReservations();

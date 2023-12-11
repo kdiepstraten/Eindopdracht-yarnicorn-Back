@@ -39,7 +39,11 @@ public class UserController {
         UserDto result = userService.createUserWithProfile(userDto);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
-
+    @PutMapping("/{username}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable String username, @Valid @RequestBody UserDto userDto) {
+        UserDto result = userService.updateUser(username, userDto);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
     @DeleteMapping("/{username}")
     public ResponseEntity<UserDto> deleteUser(@PathVariable String username) {
         userService.deleteUser(username);

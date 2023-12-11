@@ -50,7 +50,18 @@ public class ReservationService {
         return savedReservationDto;
 
     }
+    public ReservationDto updateReservation(Long id, @RequestBody ReservationDto reservationDto) {
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Reservation not found with id: " + id));
 
+        reservationDtoToReservation(reservationDto, reservation);
+
+        Reservation savedReservation = reservationRepository.save(reservation);
+
+        ReservationDto savedReservationDto = new ReservationDto();
+        reservationToReservationDto(savedReservation, savedReservationDto);
+        return savedReservationDto;
+    }
     private void reservationToReservationDto(Reservation reservation, ReservationDto rdto) {
         rdto.setFullName(reservation.getFullName());
         rdto.setEmail(reservation.getEmail());

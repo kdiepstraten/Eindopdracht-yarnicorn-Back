@@ -28,7 +28,15 @@ public class ReviewController {
         ReviewDto rdto = reviewService.createReview(reviewDto);
         return new ResponseEntity<>(rdto, HttpStatus.CREATED);
     }
-
+    @PutMapping("/{id}")
+    public ResponseEntity<ReviewDto> updateReview(@PathVariable Long id, @Valid @RequestBody ReviewDto reviewDto) {
+        try {
+            ReviewDto rdto = reviewService.updateReview(id, reviewDto);
+            return new ResponseEntity<>(rdto, HttpStatus.OK);
+        } catch (IdNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<ReviewDto> deleteReview(@PathVariable Long id) {
         try {
