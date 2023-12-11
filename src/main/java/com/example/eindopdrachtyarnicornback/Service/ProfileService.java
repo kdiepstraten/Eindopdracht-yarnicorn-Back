@@ -76,7 +76,19 @@ public class ProfileService {
 
         return savedProfileDto;
     }
-
+    public ProfileDto updateProfile(Long id, ProfileDto profileDto) {
+        Optional<Profile> profileOptional = profileRepository.findById(id);
+        if (profileOptional.isPresent()) {
+            Profile profile = profileOptional.get();
+            profileDtoToProfile(profileDto, profile);
+            Profile savedProfile = profileRepository.save(profile);
+            ProfileDto savedProfileDto = new ProfileDto();
+            profileToProfileDto(savedProfile, savedProfileDto);
+            return savedProfileDto;
+        } else {
+            throw new IdNotFoundException("Profile not found with ID: " + id);
+        }
+    }
     private void profileAndUserDtoToProfile(ProfileAndUserDto pDto, Profile p) {
         p.setFirstName(pDto.getFirstName());
         p.setLastName(pDto.getLastName());

@@ -36,7 +36,15 @@ public class ProfileController {
         ProfileDto pdto = profileService.createProfile(profileAndUserDto);
         return new ResponseEntity<>(pdto, HttpStatus.CREATED);
     }
-
+    @PutMapping("/{id}")
+    public ResponseEntity<ProfileDto> updateProfile(@PathVariable Long id, @Valid @RequestBody ProfileDto profileDto) {
+        try {
+            ProfileDto pdto = profileService.updateProfile(id, profileDto);
+            return new ResponseEntity<>(pdto, HttpStatus.OK);
+        } catch (IdNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<ProfileDto> deleteProfile(@PathVariable Long id) {
         try {
