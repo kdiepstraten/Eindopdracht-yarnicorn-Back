@@ -24,7 +24,11 @@ public class UserController {
         List<UserDto> dDto = userService.getAllUsers();
         return new ResponseEntity<>(dDto, HttpStatus.OK);
     }
-
+@GetMapping("/{username}")
+    public ResponseEntity<UserDto> getOneUser(@PathVariable String username) {
+        UserDto dDto = userService.getUser(username);
+        return new ResponseEntity<>(dDto, HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<UserDto> createUserWithProfile(@Valid @RequestBody ProfileAndUserDto userDto) {

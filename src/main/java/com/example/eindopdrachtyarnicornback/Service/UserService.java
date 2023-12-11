@@ -99,6 +99,17 @@ public class UserService {
         return savedUserDto;
     }
 
+    public UserDto getUser(String username) {
+        Optional<User> user = userRepository.findById(username);
+        if (user.isPresent()) {
+            User u = user.get();
+            UserDto uDto = new UserDto();
+            userToUserDto(u, uDto);
+            return (uDto);
+        } else {
+            throw new IdNotFoundException("User not found with username: " + username);
+        }
+    }
 
     private void profileDtoToProfile(ProfileAndUserDto pDto, Profile p) {
         p.setFirstName(pDto.getFirstName());
