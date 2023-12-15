@@ -1,6 +1,7 @@
 package com.example.eindopdrachtyarnicornback.Service;
 
 import com.example.eindopdrachtyarnicornback.DTO.ReviewDto;
+import com.example.eindopdrachtyarnicornback.Exceptions.IdNotFoundException;
 import com.example.eindopdrachtyarnicornback.Models.Review;
 import com.example.eindopdrachtyarnicornback.Repository.ReviewRepository;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,25 @@ public class ReviewService {
         reviewToReviewDto(savedReview, savedReviewDto);
 
         return savedReviewDto;
+    }
+    public ReviewDto updateReview(Long id, ReviewDto reviewDto) {
+        if (reviewRepository.existsById(id)) {
+            Review review = reviewRepository.findById(id).get();
+            reviewDtoToReview(reviewDto, review);
+            Review savedReview = reviewRepository.save(review);
+            ReviewDto savedReviewDto = new ReviewDto();
+            reviewToReviewDto(savedReview, savedReviewDto);
+            return savedReviewDto;
+        } else {
+            throw new IdNotFoundException("Review with id " + id + " not found");
+        }
+    }
+    public String deleteReview(Long id) {
+        if (reviewRepository.existsById(id)) {
+            reviewRepository.deleteById(id);
+        } else {
+            throw new IdNotFoundException("Review with id " + id + " not found");
+        }
+        return "Review deleted";
     }
 }
